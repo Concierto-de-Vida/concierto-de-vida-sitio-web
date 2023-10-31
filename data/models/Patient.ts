@@ -5,7 +5,7 @@ export type Patient = z.infer<typeof PatientModel>;
 const PatientModel = z.object({
   firstName: z.string(),
   lastName: z.string(),
-  birthdate: z.date(),
+  birthdate: z.date().optional(),
 });
 
 export default PatientModel;
@@ -26,8 +26,5 @@ export function castPatientValue(
     case "firstName":
     case "lastName":
       return (patient[key] = value as string);
-
-    default:
-      return key as never;
   }
 }
