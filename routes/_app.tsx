@@ -1,9 +1,7 @@
-import { asset } from "$fresh/runtime.ts";
 import { AppProps } from "$fresh/server.ts";
 import { Links } from "../components/Links.tsx";
-import Typography from "../components/Typography.tsx";
 
-const MAX_WIDTH = "max-w-screen-xl";
+const MAX_WIDTH = "max-w-screen-lg";
 
 export default function App({ Component }: AppProps) {
   return (
@@ -31,25 +29,6 @@ export default function App({ Component }: AppProps) {
         <div class={`px-4 pt-3 mx-auto w-full ${MAX_WIDTH} flex-1 h-full`}>
           <Component />
         </div>
-
-        <footer class="flex justify-center p-3">
-          <div class={`flex justify-between items-center w-full ${MAX_WIDTH}`}>
-            <Typography variant="smallP" class="text-center">
-              © 2023 Concierto de Vida
-            </Typography>
-
-            <div class="flex gap-3">
-              <a
-                href="https://www.facebook.com/conciertodevidaEM"
-                target="blank"
-                class="flex gap-1 hover:underline"
-              >
-                <img width="15" height="15" src={asset("./facebook-grey.svg")} />
-                <Typography variant="smallP">FACEBOOK</Typography>
-              </a>
-            </div>
-          </div>
-        </footer>
       </body>
     </html>
   );
