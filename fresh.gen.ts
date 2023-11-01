@@ -6,8 +6,9 @@ import * as $0 from "./routes/_404.tsx";
 import * as $1 from "./routes/_500.tsx";
 import * as $2 from "./routes/_app.tsx";
 import * as $3 from "./routes/index.tsx";
-import * as $4 from "./routes/pacientes/index.tsx";
-import * as $5 from "./routes/pacientes/nuevo.tsx";
+import * as $4 from "./routes/pacientes/[id].tsx";
+import * as $5 from "./routes/pacientes/index.tsx";
+import * as $6 from "./routes/pacientes/removeall.tsx";
 import * as $$0 from "./islands/GetDateInput.tsx";
 
 const manifest = {
@@ -16,8 +17,9 @@ const manifest = {
     "./routes/_500.tsx": $1,
     "./routes/_app.tsx": $2,
     "./routes/index.tsx": $3,
-    "./routes/pacientes/index.tsx": $4,
-    "./routes/pacientes/nuevo.tsx": $5,
+    "./routes/pacientes/[id].tsx": $4,
+    "./routes/pacientes/index.tsx": $5,
+    "./routes/pacientes/removeall.tsx": $6,
   },
   islands: {
     "./islands/GetDateInput.tsx": $$0,

@@ -1,3 +1,4 @@
+import { JSX } from "preact";
 import { MdToday } from "react-icons/md";
 import { useSignal } from "@preact/signals";
 import GetInput from "../components/GetInput.tsx";
@@ -8,12 +9,12 @@ export type DateElements = "date" | "month" | "year" | "hours" | "minutes" | "se
 
 interface EditableObjectDateInputProps {
   id: string;
-  value?: string | number;
   onlyDate?: boolean;
+  defaultValue?: JSX.HTMLAttributes["defaultValue"];
 }
 
-export default function GetDateInput({ value, id, onlyDate }: EditableObjectDateInputProps) {
-  const dateObj = new Date(value === undefined ? Date.now() : +value);
+export default function GetDateInput({ defaultValue, id, onlyDate }: EditableObjectDateInputProps) {
+  const dateObj = new Date(defaultValue === undefined ? Date.now() : +defaultValue);
 
   const day = useSignal(dateObj.getDate());
   const month = useSignal(dateObj.getMonth());

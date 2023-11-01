@@ -19,6 +19,7 @@ export default function GetInput({
   ...props
 }: GetInputProps): JSX.Element {
   const classes = `px-2 w-full ${className ?? ""}`;
+  props.defaultValue;
 
   switch (type) {
     case "number":
@@ -48,6 +49,6 @@ export default function GetInput({
       );
 
     case "date":
-      return <GetDateInput onlyDate={onlyDate} id={id} />;
+      return <GetDateInput defaultValue={props.defaultValue} onlyDate={onlyDate} id={id} />;
   }
 }

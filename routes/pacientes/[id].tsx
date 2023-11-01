@@ -1,19 +1,12 @@
 import moment from "moment";
 import db from "../../data/database.ts";
-import { Handlers } from "$fresh/server.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
 import redirect from "../../utils/redirect.ts";
 import Button from "../../components/Button.tsx";
 import DataInput from "../../types/DataInput.tsx";
-import GetInput from "../../components/GetInput.tsx";
+import Typography from "../../components/Typography.tsx";
+import Input from "../../components/pacientes/Input.tsx";
 import { Patient, castPatientValue } from "../../data/models/Patient.ts";
-import Typography, { getTypographyClass } from "../../components/Typography.tsx";
-
-const styles = {
-  label:
-    `whitespace-nowrap flex items-center gap-2 max-w-full md:max-w-[40%] font-semibold ` +
-    `${getTypographyClass("p")}`,
-  colsImport: "",
-};
 
 const DATA: (DataInput | DataInput[])[] = [
   [
@@ -39,9 +32,14 @@ const DATA: (DataInput | DataInput[])[] = [
   },
 ];
 
-export const handler: Handlers = {
+export const handler: Handlers<NuevoPacienteProps | { message: string }> = {
   async GET(_, ctx) {
-    return await ctx.render();
+    if (ctx.params.id === "nuevo") return await ctx.render({});
+
+    const patient = await db.patients.find(ctx.params.id);
+    if (!patient?.value) return ctx.renderNotFound({ message: `Paciente no encontrado` });
+
+    return ctx.render({ patient: patient.value });
   },
   async POST(req, ctx) {
     const form = await req.formData();
@@ -72,57 +70,33 @@ export const handler: Handlers = {
           date[key](value);
         }
 
-        castPatientValue(data.id, date.toDate(), newPatient);
+        castPatientValue(data.id, date.valueOf(), newPatient);
       } else {
         castPatientValue(data.id, value, newPatient);
       }
     }
 
-    await db.patients.add(newPatient);
+    if (ctx.params.id === "nuevo") {
+      await db.patients.add(newPatient);
+    } else {
+      await db.patients.write(ctx.params.id, newPatient);
+    }
 
     return redirect("/pacientes");
   },
 };
 
-function Input({ data, class: className = "" }: { data: DataInput | DataInput[]; class?: string }) {
-  if (Array.isArray(data)) {
-    const cols = data.reduce((acc, curr) => acc + (curr.colSpan ?? 1), 0);
-
-    return (
-      <div class={`grid grid-cols-1 md:grid-cols-${cols} gap-3`}>
-        {data.map((data) => (
-          <Input data={data} class={data.colSpan === undefined ? "" : `col-span-${data.colSpan}`} />
-        ))}
-      </div>
-    );
-  }
-
-  const { id, type, name, required } = data;
-  return (
-    <div class={`flex gap-2 flex-wrap md:flex-nowrap ${className}`} title={name}>
-      <label for={id} class={`${styles.label} ${type !== "date" ? "mb-[-10px]" : ""}`}>
-        <p class="truncate text-ellipsis">{name}:</p>
-      </label>
-
-      {
-        <GetInput
-          id={id}
-          type={type}
-          required={required}
-          class="border-b-2 border-b-black"
-          onlyDate={"onlyDate" in data ? data.onlyDate : false}
-        />
-      }
-    </div>
-  );
+interface NuevoPacienteProps {
+  patient?: Patient;
 }
 
-export default function NuevoPaciente() {
+export default function NuevoPaciente({ data }: PageProps<NuevoPacienteProps>) {
+  const { patient } = data;
   return (
     <form method="POST" class="flex flex-col items-center mt-4">
       <div class="w-full flex flex-col gap-3">
         {DATA.map((data) => (
-          <Input data={data} />
+          <Input data={data} patient={patient} />
         ))}
       </div>
 
