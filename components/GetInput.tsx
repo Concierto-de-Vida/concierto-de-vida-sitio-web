@@ -18,7 +18,7 @@ export default function GetInput({
   class: className,
   ...props
 }: GetInputProps): JSX.Element {
-  const classes = `px-2 w-full ${className ?? ""}`;
+  const classes = `px-1 md:px-2 w-full ${className ?? ""}`;
 
   switch (type) {
     case "number":
