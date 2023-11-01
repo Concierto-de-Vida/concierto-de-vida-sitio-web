@@ -1,6 +1,12 @@
 import { Head } from "$fresh/runtime.ts";
+import { UnknownPageProps } from "$fresh/server.ts";
+import Typography from "../components/Typography.tsx";
 
-export default function Error404() {
+interface Error404Props {
+  message?: string;
+}
+
+export default function Error404({ data }: UnknownPageProps<Error404Props>) {
   return (
     <>
       <Head>
@@ -8,11 +14,17 @@ export default function Error404() {
       </Head>
       <div class="px-4 py-8 mx-auto">
         <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-          <h1 class="text-4xl font-bold">404 - Página no encontrada</h1>
+          <Typography variant="h2">404 - Página no encontrada</Typography>
           <p class="my-4">La página que buscas no ha sido encontrada.</p>
           <a href="/" class="underline">
             Ir a la página principal
           </a>
+
+          {data?.message && (
+            <p class="mt-4">
+              <code>{data.message}</code>
+            </p>
+          )}
         </div>
       </div>
     </>

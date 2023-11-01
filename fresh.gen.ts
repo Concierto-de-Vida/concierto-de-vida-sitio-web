@@ -3,22 +3,25 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $0 from "./routes/_404.tsx";
-import * as $1 from "./routes/_app.tsx";
-import * as $2 from "./routes/index.tsx";
-import * as $3 from "./routes/pacientes/index.tsx";
-import * as $4 from "./routes/pacientes/nuevo.tsx";
-import * as $5 from "./routes/pacientes/removeall.tsx";
+import * as $1 from "./routes/_500.tsx";
+import * as $2 from "./routes/_app.tsx";
+import * as $3 from "./routes/index.tsx";
+import * as $4 from "./routes/pacientes/index.tsx";
+import * as $5 from "./routes/pacientes/nuevo.tsx";
+import * as $$0 from "./islands/GetDateInput.tsx";
 
 const manifest = {
   routes: {
     "./routes/_404.tsx": $0,
-    "./routes/_app.tsx": $1,
-    "./routes/index.tsx": $2,
-    "./routes/pacientes/index.tsx": $3,
-    "./routes/pacientes/nuevo.tsx": $4,
-    "./routes/pacientes/removeall.tsx": $5,
+    "./routes/_500.tsx": $1,
+    "./routes/_app.tsx": $2,
+    "./routes/index.tsx": $3,
+    "./routes/pacientes/index.tsx": $4,
+    "./routes/pacientes/nuevo.tsx": $5,
   },
-  islands: {},
+  islands: {
+    "./islands/GetDateInput.tsx": $$0,
+  },
   baseUrl: import.meta.url,
 };
 

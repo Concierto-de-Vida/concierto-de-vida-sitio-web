@@ -1,3 +1,3 @@
-type InputType = "text" | "number";
+type InputType = "text" | "number" | "date";
 
 export default InputType;

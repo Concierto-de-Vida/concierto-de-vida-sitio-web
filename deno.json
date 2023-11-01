@@ -3,17 +3,21 @@
   "tasks": {
     "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
     "start": "deno run -A --unstable --watch=static/,routes/ dev.ts",
+    "dev": "deno run -A --unstable --watch=static/,routes/ dev.ts",
     "build": "deno run -A --unstable dev.ts build",
     "preview": "deno run -A --unstable main.ts",
-    "update": "deno run -A --unstable -r https://fresh.deno.dev/update ."
+    "update": "deno run -A --unstable -r https://fresh.deno.dev/update .",
+    "run:molt": "deno run --allow-env --allow-read --allow-write=. --allow-run=git,deno --allow-net=deno.land,esm.sh,cdn.jsdelivr.net https://deno.land/x/molt/cli.ts",
+    "update_deps": "deno task -q run:molt check ./**/*.ts"
   },
   "lint": { "rules": { "tags": ["fresh", "recommended"] } },
   "imports": {
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.0",
     "@preact/signals": "https://esm.sh/*@preact/signals@1.2.1",
     "$fresh/": "https://deno.land/x/fresh@1.5.2/",
-    "$std/": "https://deno.land/std@0.193.0/",
+    "$std/": "https://deno.land/std@0.204.0/",
     "kvdex": "https://deno.land/x/kvdex@v0.18.4/mod.ts",
+    "moment": "npm:moment@2.29.4",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.2.2",
     "preact": "https://esm.sh/preact@10.18.1",
     "preact/": "https://esm.sh/preact@10.18.1/",

@@ -1,3 +1,4 @@
+import moment from "moment";
 import db from "../../data/database.ts";
 import { Handlers } from "$fresh/server.ts";
 import redirect from "../../utils/redirect.ts";
@@ -31,9 +32,10 @@ const DATA: (DataInput | DataInput[])[] = [
   ],
   {
     id: "birthdate",
-    type: "text",
+    type: "date",
     name: "Fecha de nacimiento",
     required: true,
+    onlyDate: true,
   },
 ];
 
@@ -45,10 +47,35 @@ export const handler: Handlers = {
     const form = await req.formData();
     const newPatient = {} as Patient;
 
+    const formEntries = Object.fromEntries(form.entries());
+
     for (const data of DATA.flat()) {
-      const value = form.get(data.id)?.toString();
-      if (value === undefined && data.required) return ctx.renderNotFound();
-      if (value !== undefined) castPatientValue(data.id, value, newPatient);
+      const value = formEntries[data.id];
+      if (value === undefined && data.type !== "date") {
+        if (data.required) return ctx.renderNotFound({ message: `Missing required field: ${data.id}` });
+        else continue;
+      }
+
+      if (data.type === "date") {
+        const offset = +formEntries["offset"];
+        if (isNaN(offset)) return ctx.renderNotFound({ message: `Missing required field: offset` });
+
+        const date = moment().utcOffset(offset).startOf("day");
+
+        const keys = data.onlyDate
+          ? (["year", "month", "date"] as const)
+          : (["year", "month", "date", "hours", "minutes", "seconds"] as const);
+
+        for (const key of keys) {
+          const value = +formEntries[`${data.id}&${key}`];
+          if (isNaN(value)) return ctx.renderNotFound({ message: `Missing required field: ${data.id}&${key}` });
+          date[key](value);
+        }
+
+        castPatientValue(data.id, date.toDate(), newPatient);
+      } else {
+        castPatientValue(data.id, value, newPatient);
+      }
     }
 
     await db.patients.add(newPatient);
@@ -73,11 +100,19 @@ function Input({ data, class: className = "" }: { data: DataInput | DataInput[];
   const { id, type, name, required } = data;
   return (
     <div class={`flex gap-2 flex-wrap md:flex-nowrap ${className}`} title={name}>
-      <label for={id} class={styles.label}>
+      <label for={id} class={`${styles.label} ${type !== "date" ? "mb-[-10px]" : ""}`}>
         <p class="truncate text-ellipsis">{name}:</p>
       </label>
 
-      {<GetInput id={id} type={type} required={required} class="border-b-2 border-b-black" />}
+      {
+        <GetInput
+          id={id}
+          type={type}
+          required={required}
+          class="border-b-2 border-b-black"
+          onlyDate={"onlyDate" in data ? data.onlyDate : false}
+        />
+      }
     </div>
   );
 }
