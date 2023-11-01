@@ -3,7 +3,7 @@ import { MdToday } from "react-icons/md";
 import { useSignal } from "@preact/signals";
 import GetInput from "../components/GetInput.tsx";
 import MonthSelect from "../components/MonthSelect.tsx";
-import Button, { getButtonClasses } from "../components/Button.tsx";
+import { getButtonClasses } from "../components/Button.tsx";
 
 export type DateElements = "date" | "month" | "year" | "hours" | "minutes" | "seconds";
 
@@ -70,8 +70,8 @@ export default function GetDateInput({ defaultValue, id, onlyDate }: EditableObj
       {/* Today button */}
       <div
         title="Hoy"
-        class={getButtonClasses("blue", false) + " px-2 flex items-center cursor-pointer h-[26px]"}
         onClick={handleDateToday}
+        class={`${getButtonClasses("blue", false)} px-2 flex items-center cursor-pointer h-[26px]`}
       >
         <MdToday size={13} />
       </div>

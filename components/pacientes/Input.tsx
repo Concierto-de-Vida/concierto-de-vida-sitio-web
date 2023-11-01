@@ -24,6 +24,7 @@ export default function Input({ data, class: className = "", patient }: InputPro
         {data.map((data) => (
           <Input
             data={data}
+            key={data.id}
             patient={patient}
             class={data.colSpan === undefined ? "" : `col-span-${data.colSpan}`}
           />
@@ -33,22 +34,22 @@ export default function Input({ data, class: className = "", patient }: InputPro
   }
 
   const { id, type, name, required } = data;
+  const forLabel = type === "date" ? `${id}&date` : id;
+
   return (
     <div class={`flex gap-2 flex-wrap md:flex-nowrap ${className}`} title={name}>
-      <label for={id} class={`${styles.label} ${type !== "date" ? "mb-[-10px]" : ""}`}>
+      <label for={forLabel} class={`${styles.label} ${type !== "date" ? "mb-[-5px]" : ""}`}>
         <p class="truncate text-ellipsis">{name}:</p>
       </label>
 
-      {
-        <GetInput
-          id={id}
-          type={type}
-          required={required}
-          class="border-b-2 border-b-black"
-          defaultValue={(patient?.[id] ?? "").toString() || undefined}
-          onlyDate={"onlyDate" in data ? data.onlyDate : false}
-        />
-      }
+      <GetInput
+        id={id}
+        type={type}
+        required={required}
+        class="border-b-2 border-b-black"
+        defaultValue={(patient?.[id] ?? "").toString() || undefined}
+        onlyDate={"onlyDate" in data ? data.onlyDate : false}
+      />
     </div>
   );
 }

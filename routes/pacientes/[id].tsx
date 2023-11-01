@@ -1,4 +1,5 @@
 import moment from "moment";
+import { JSX } from "preact";
 import db from "../../data/database.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import redirect from "../../utils/redirect.ts";
@@ -92,13 +93,16 @@ interface NuevoPacienteProps {
 
 export default function NuevoPaciente({ data }: PageProps<NuevoPacienteProps>) {
   const { patient } = data;
+
+  const inputs: JSX.Element[] = [];
+  for (const data of DATA) {
+    const key = Array.isArray(data) ? data.map((d) => d.id).join("") : data.id;
+    inputs.push(<Input data={data} patient={patient} key={key} />);
+  }
+
   return (
     <form method="POST" class="flex flex-col items-center mt-4">
-      <div class="w-full flex flex-col gap-3">
-        {DATA.map((data) => (
-          <Input data={data} patient={patient} />
-        ))}
-      </div>
+      <div class="w-full flex flex-col gap-3">{inputs}</div>
 
       <div>
         <Button type="submit" class="mt-8" color="green">
