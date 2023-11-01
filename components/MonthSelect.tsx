@@ -4,12 +4,11 @@ interface MonthSelectProps extends JSX.HTMLAttributes<HTMLSelectElement> {
   /** From 0 to 11 */
   month: number;
   id: string;
-  class?: string;
 }
 
-export default function MonthSelect({ month, id, class: classes, ...other }: MonthSelectProps) {
+export default function MonthSelect({ month, id, ...other }: MonthSelectProps) {
   return (
-    <select id={id} name={id} class={classes} value={month} {...other}>
+    <select id={id} name={id} value={month} {...other}>
       <option value="0">Enero</option>
       <option value="1">Febrero</option>
       <option value="2">Marzo</option>
