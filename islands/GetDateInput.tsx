@@ -37,6 +37,7 @@ export default function GetDateInput({ defaultValue, id, onlyDate }: EditableObj
   const timezoneOffset = new Date().getTimezoneOffset() * -1;
 
   function handleDateToday() {
+    year.value = 0;
     const date = new Date();
     day.value = date.getDate();
     month.value = date.getMonth();
