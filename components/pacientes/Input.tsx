@@ -34,13 +34,11 @@ export default function Input({ data, class: className = "", patient }: InputPro
   }
 
   const { id, type, name, required } = data;
-  const forLabel = type === "date" ? `${id}&date` : id;
-
   return (
-    <div class={`flex gap-2 flex-wrap md:flex-nowrap ${className}`} title={name}>
-      <label for={forLabel} class={`${styles.label} ${type !== "date" ? "mb-[-5px]" : ""}`}>
+    <label class={`flex gap-2 flex-wrap md:flex-nowrap ${className}`} title={name}>
+      <div class={`${styles.label} ${type !== "date" ? "md:mb-[-5px]" : ""}`}>
         <p class="truncate text-ellipsis">{name}:</p>
-      </label>
+      </div>
 
       <GetInput
         id={id}
@@ -50,6 +48,6 @@ export default function Input({ data, class: className = "", patient }: InputPro
         defaultValue={(patient?.[id] ?? "").toString() || undefined}
         onlyDate={"onlyDate" in data ? data.onlyDate : false}
       />
-    </div>
+    </label>
   );
 }
