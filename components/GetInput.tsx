@@ -19,7 +19,6 @@ export default function GetInput({
   ...props
 }: GetInputProps): JSX.Element {
   const classes = `px-2 w-full ${className ?? ""}`;
-  props.defaultValue;
 
   switch (type) {
     case "number":
@@ -29,8 +28,8 @@ export default function GetInput({
           id={id}
           name={id}
           class={classes}
-          placeholder={placeholder}
           type={"number"}
+          placeholder={placeholder}
           step={step ?? "0.000000001"}
         />
       );
@@ -41,10 +40,10 @@ export default function GetInput({
           {...props}
           id={id}
           name={id}
-          class={classes}
-          placeholder={placeholder}
           type={"text"}
+          class={classes}
           step={step ?? undefined}
+          placeholder={placeholder}
         />
       );
 

@@ -14,7 +14,7 @@ interface EditableObjectDateInputProps {
 }
 
 export default function GetDateInput({ defaultValue, id, onlyDate }: EditableObjectDateInputProps) {
-  const dateObj = new Date(defaultValue === undefined ? Date.now() : +defaultValue);
+  const dateObj = new Date(!defaultValue ? Date.now() : +defaultValue);
 
   const day = useSignal(dateObj.getDate());
   const month = useSignal(dateObj.getMonth());

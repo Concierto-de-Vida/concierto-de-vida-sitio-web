@@ -45,7 +45,7 @@ export default function Input({ data, class: className = "", patient }: InputPro
           type={type}
           required={required}
           class="border-b-2 border-b-black"
-          defaultValue={(patient?.[id] ?? "").toString()}
+          defaultValue={(patient?.[id] ?? "").toString() || undefined}
           onlyDate={"onlyDate" in data ? data.onlyDate : false}
         />
       }
