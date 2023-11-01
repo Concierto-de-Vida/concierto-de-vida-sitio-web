@@ -66,13 +66,13 @@ export default function GetDateInput({ defaultValue, id, onlyDate }: EditableObj
           />
         )
       )}
-      <input type="hidden" name="offset" id="offset&" value={timezoneOffset} />
+      <input type="hidden" name="offset" value={timezoneOffset} />
 
       {/* Today button */}
       <div
         title="Hoy"
         onClick={handleDateToday}
-        class={`${getButtonClasses("blue", false)} px-2 flex items-center cursor-pointer h-[26px]`}
+        class={`${getButtonClasses("blue", false)} px-2 hidden md:flex items-center cursor-pointer h-[26px]`}
       >
         <MdToday size={13} />
       </div>
