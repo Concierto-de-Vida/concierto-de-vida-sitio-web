@@ -10,6 +10,13 @@ import Input from "../../components/pacientes/Input.tsx";
 import { Patient, castPatientValue } from "../../data/models/Patient.ts";
 
 const DATA: (DataInput | DataInput[])[] = [
+  {
+    id: "createdAt",
+    type: "date",
+    name: "Fecha de registro",
+    required: true,
+    onlyDate: true,
+  },
   [
     {
       id: "firstName",

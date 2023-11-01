@@ -6,6 +6,7 @@ const PatientModel = z.object({
   firstName: z.string(),
   lastName: z.string(),
   birthdate: z.number(),
+  createdAt: z.number(),
 });
 
 export default PatientModel;
@@ -21,6 +22,7 @@ export function castPatientValue(
 ): Patient[keyof Patient] {
   switch (key) {
     case "birthdate":
+    case "createdAt":
       return (patient[key] = value as number);
 
     case "firstName":
