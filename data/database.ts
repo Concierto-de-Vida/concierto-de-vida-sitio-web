@@ -1,6 +1,6 @@
 import TokenModel from "./models/Token.ts";
 import PatientModel from "./models/Patient.ts";
-import { kvdex, indexableCollection } from "kvdex";
+import { kvdex, indexableCollection, model } from "kvdex";
 
 const kv = await Deno.openKv();
 
@@ -13,6 +13,11 @@ const db = kvdex(kv, {
   patients: indexableCollection(PatientModel, {
     indices: {},
   }),
+});
+
+export const dbWithoutCheck = kvdex(kv, {
+  tokens: indexableCollection(model(), { indices: {} }),
+  patients: indexableCollection(model(), { indices: {} }),
 });
 
 export default db;
