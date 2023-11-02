@@ -34,8 +34,9 @@ export default function Input({ data, class: className = "", patient }: InputPro
   }
 
   const { id, type, name, required } = data;
+  const marginTop = type === "date" ? "mt-2" : "";
   return (
-    <label class={`flex gap-2 flex-wrap md:flex-nowrap ${className}`} title={name}>
+    <label class={`flex gap-2 flex-wrap md:flex-nowrap ${className} ${marginTop}`} title={name}>
       <div class={`${styles.label} ${type !== "date" ? "md:mb-[-3px]" : ""}`}>
         <p class="truncate text-ellipsis">{name}:</p>
       </div>

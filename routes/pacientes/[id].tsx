@@ -115,7 +115,7 @@ export default function NuevoPaciente({ data }: PageProps<NuevoPacienteProps>) {
 
   return (
     <form method="POST" class="flex flex-col items-center mt-4">
-      <div class="w-full flex flex-col gap-3">{inputs}</div>
+      <div class="w-full flex flex-col gap-6">{inputs}</div>
 
       <div>
         <Button type="submit" class="mt-8" color="green">
