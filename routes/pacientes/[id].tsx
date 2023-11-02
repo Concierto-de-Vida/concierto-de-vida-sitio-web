@@ -32,6 +32,12 @@ const DATA: (DataInput | DataInput[])[] = [
     },
   ],
   {
+    id: "email",
+    type: "text",
+    name: "Correo electrónico",
+    required: true,
+  },
+  {
     id: "birthdate",
     type: "date",
     name: "Fecha de nacimiento",
