@@ -29,6 +29,8 @@ export default function GetInput({
 
   switch (type) {
     case "number":
+      if (autocomplete && isAutocompleteRecord(autocomplete))
+        throw new Error("Autocomplete must be a string: " + autocomplete);
       return (
         <input
           {...props}
@@ -37,11 +39,14 @@ export default function GetInput({
           class={classes}
           type={"number"}
           placeholder={placeholder}
+          autoComplete={autocomplete}
           step={step ?? "0.000000001"}
         />
       );
 
     case "text":
+      if (autocomplete && isAutocompleteRecord(autocomplete))
+        throw new Error("Autocomplete must be a string: " + autocomplete);
       return (
         <input
           {...props}
@@ -51,6 +56,7 @@ export default function GetInput({
           class={classes}
           step={step ?? undefined}
           placeholder={placeholder}
+          autoComplete={autocomplete}
         />
       );
 
