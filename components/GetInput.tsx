@@ -1,5 +1,6 @@
 import { JSX } from "preact";
 import InputType from "../types/InputType.tsx";
+import { Option } from "../types/DataInput.tsx";
 import GetDateInput from "../islands/GetDateInput.tsx";
 
 interface GetInputProps extends JSX.HTMLAttributes<HTMLInputElement> {
@@ -7,12 +8,14 @@ interface GetInputProps extends JSX.HTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   type: InputType;
   onlyDate?: boolean;
+  options?: Option[];
 }
 
 export default function GetInput({
   id,
   type,
   step,
+  options,
   onlyDate,
   placeholder,
   class: className,
@@ -49,5 +52,30 @@ export default function GetInput({
 
     case "date":
       return <GetDateInput defaultValue={props.defaultValue} onlyDate={onlyDate} id={id} />;
+
+    case "checkbox":
+      return <p>To do</p>;
+
+    case "radio":
+      return (
+        <div class="flex flex-wrap gap-2">
+          {options?.map((option) => (
+            <div class="flex items-center gap-2">
+              <input
+                name={id}
+                type="radio"
+                class={classes}
+                value={option.id}
+                id={`${id}_${option.id}`}
+                checked={props.defaultValue === option.id}
+                {...props}
+              />
+              <label class="flex items-center gap-2" for={`${id}_${option.id}`}>
+                {option.name}
+              </label>
+            </div>
+          ))}
+        </div>
+      );
   }
 }

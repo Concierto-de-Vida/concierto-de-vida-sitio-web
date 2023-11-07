@@ -44,6 +44,26 @@ const DATA: (DataInput | DataInput[])[] = [
     required: true,
     onlyDate: true,
   },
+  {
+    id: "gender",
+    type: "radio",
+    name: "Género",
+    required: true,
+    options: [
+      {
+        id: "male",
+        name: "Masculino",
+      },
+      {
+        id: "female",
+        name: "Femenino",
+      },
+      {
+        id: "other",
+        name: "Otro",
+      },
+    ],
+  },
 ];
 
 export const handler: Handlers<NuevoPacienteProps | { message: string }> = {
@@ -55,11 +75,14 @@ export const handler: Handlers<NuevoPacienteProps | { message: string }> = {
 
     return ctx.render({ patient: patient.value });
   },
+
   async POST(req, ctx) {
     const form = await req.formData();
     const newPatient = {} as Patient;
 
     const formEntries = Object.fromEntries(form.entries());
+
+    console.log(formEntries);
 
     for (const data of DATA.flat()) {
       const value = formEntries[data.id];

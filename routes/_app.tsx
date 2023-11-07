@@ -1,5 +1,5 @@
-import { AppProps } from "$fresh/server.ts";
 import { Partial } from "$fresh/runtime.ts";
+import { AppProps } from "$fresh/server.ts";
 import { Links } from "../components/Links.tsx";
 
 const MAX_WIDTH = "max-w-screen-lg";

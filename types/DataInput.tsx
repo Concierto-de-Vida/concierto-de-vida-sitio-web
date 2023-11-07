@@ -16,12 +16,28 @@ export interface DateDataInput extends GenericDataInput {
 
 export interface NumberDataInput extends GenericDataInput {
   type: Extract<InputType, "number">;
+  autocomplete?: "email";
 }
 
 export interface TextDataInput extends GenericDataInput {
   type: Extract<InputType, "text">;
 }
 
-type DataInput = DateDataInput | NumberDataInput | TextDataInput;
+export interface Option {
+  id: string;
+  name: string;
+}
+
+export interface CheckboxDataInput extends GenericDataInput {
+  type: Extract<InputType, "checkbox">;
+  options: Option[];
+}
+
+export interface RadioDataInput extends GenericDataInput {
+  type: Extract<InputType, "radio">;
+  options: Option[];
+}
+
+type DataInput = DateDataInput | NumberDataInput | TextDataInput | CheckboxDataInput | RadioDataInput;
 
 export default DataInput;
