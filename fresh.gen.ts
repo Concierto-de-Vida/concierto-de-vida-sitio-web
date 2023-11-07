@@ -10,6 +10,7 @@ import * as $4 from "./routes/pacientes/[id].tsx";
 import * as $5 from "./routes/pacientes/index.tsx";
 import * as $6 from "./routes/pacientes/removeall.tsx";
 import * as $$0 from "./islands/GetDateInput.tsx";
+import { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
@@ -25,6 +26,6 @@ const manifest = {
     "./islands/GetDateInput.tsx": $$0,
   },
   baseUrl: import.meta.url,
-};
+} satisfies Manifest;
 
 export default manifest;
