@@ -5,16 +5,23 @@ import { Signal, useSignal } from "@preact/signals";
 import DateSelect from "../components/DateSelect.tsx";
 import MonthSelect from "../components/MonthSelect.tsx";
 import { getButtonClasses } from "../components/Button.tsx";
+import Autocomplete from "../types/Autocomplete.tsx";
 
 export type DateElements = "date" | "month" | "year" | "hours" | "minutes" | "seconds";
+
+export type AutocompleteRecord = Partial<Record<DateElements, Autocomplete>>;
+export function isAutocompleteRecord(autocomplete: unknown): autocomplete is AutocompleteRecord {
+  return typeof autocomplete === "object";
+}
 
 interface EditableObjectDateInputProps {
   id: string;
   onlyDate?: boolean;
   defaultValue?: JSX.HTMLAttributes["defaultValue"];
+  autocomplete?: Partial<Record<DateElements, Autocomplete>>;
 }
 
-export default function GetDateInput({ defaultValue, id, onlyDate }: EditableObjectDateInputProps) {
+export default function GetDateInput({ defaultValue, id, onlyDate, autocomplete }: EditableObjectDateInputProps) {
   const dateObj = new Date(!defaultValue ? Date.now() : +defaultValue);
 
   const s: Record<DateElements, Signal<number>> = {
@@ -62,6 +69,7 @@ export default function GetDateInput({ defaultValue, id, onlyDate }: EditableObj
             month={value}
             id={`${id}&${key}`}
             onChange={handleDataChange(key)}
+            autoComplete={autocomplete?.month}
             class="px-2 w-full bg-gray-200 rounded"
           />
         );
@@ -75,6 +83,7 @@ export default function GetDateInput({ defaultValue, id, onlyDate }: EditableObj
             id={`${id}&${key}`}
             month={s.month.value}
             onChange={handleDataChange(key)}
+            autoComplete={autocomplete?.date}
             class="px-2 w-full bg-gray-200 rounded"
           />
         );
@@ -94,6 +103,7 @@ export default function GetDateInput({ defaultValue, id, onlyDate }: EditableObj
             id={`${id}&${key}`}
             class="bg-gray-200 rounded"
             onChange={handleDataChange(key)}
+            autoComplete={autocomplete?.[key]}
             max={key === "year" ? new Date().getFullYear() : 60}
           />
         );

@@ -1,10 +1,11 @@
 import moment from "moment";
 import { JSX } from "preact";
 import db from "../../data/database.ts";
-import { Handlers, PageProps } from "$fresh/server.ts";
 import redirect from "../../utils/redirect.ts";
 import Button from "../../components/Button.tsx";
 import DataInput from "../../types/DataInput.tsx";
+import { Handlers, PageProps } from "$fresh/server.ts";
+import Autocomplete from "../../types/Autocomplete.tsx";
 import Typography from "../../components/Typography.tsx";
 import Input from "../../components/pacientes/Input.tsx";
 import { Patient, castPatientValue } from "../../data/models/Patient.ts";
@@ -23,12 +24,14 @@ const DATA: (DataInput | DataInput[])[] = [
       type: "text",
       name: "Nombre(s)",
       required: true,
+      autocomplete: Autocomplete.GIVEN_NAME,
     },
     {
       id: "lastName",
       type: "text",
       name: "Apellidos",
       required: true,
+      autocomplete: Autocomplete.FAMILY_NAME,
     },
   ],
   {
@@ -36,6 +39,7 @@ const DATA: (DataInput | DataInput[])[] = [
     type: "text",
     name: "Correo electrónico",
     required: true,
+    autocomplete: Autocomplete.EMAIL,
   },
   {
     id: "birthdate",
@@ -43,6 +47,11 @@ const DATA: (DataInput | DataInput[])[] = [
     name: "Fecha de nacimiento",
     required: true,
     onlyDate: true,
+    autocomplete: {
+      date: Autocomplete.BDAY_DAY,
+      year: Autocomplete.BDAY_YEAR,
+      month: Autocomplete.BDAY_MONTH,
+    },
   },
   {
     id: "gender",

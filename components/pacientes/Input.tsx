@@ -35,6 +35,7 @@ export default function Input({ data, class: className = "", patient }: InputPro
 
   const { id, type, name, required } = data;
   const options = "options" in data ? data.options : undefined;
+  const autocomplete = "autocomplete" in data ? data.autocomplete : undefined;
   const marginTop = type === "date" ? "mt-2" : "";
   return (
     <label class={`flex gap-2 flex-wrap md:flex-nowrap ${className} ${marginTop}`} title={name}>
@@ -47,6 +48,7 @@ export default function Input({ data, class: className = "", patient }: InputPro
         type={type}
         options={options}
         required={required}
+        autocomplete={autocomplete}
         class="border-b-2 border-b-black"
         onlyDate={"onlyDate" in data ? data.onlyDate : false}
         defaultValue={(patient?.[id] ?? "").toString() || undefined}

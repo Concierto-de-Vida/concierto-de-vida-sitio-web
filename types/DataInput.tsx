@@ -1,5 +1,7 @@
 import InputType from "./InputType.tsx";
+import Autocomplete from "./Autocomplete.tsx";
 import { Patient } from "../data/models/Patient.ts";
+import { DateElements } from "../islands/GetDateInput.tsx";
 
 interface GenericDataInput {
   id: keyof Patient;
@@ -12,15 +14,17 @@ export interface DateDataInput extends GenericDataInput {
   type: Extract<InputType, "date">;
   /** If true, hours and below are not going to be required */
   onlyDate?: boolean;
+  autocomplete?: Partial<Record<DateElements, Autocomplete>>;
 }
 
 export interface NumberDataInput extends GenericDataInput {
   type: Extract<InputType, "number">;
-  autocomplete?: "email";
+  autocomplete?: Autocomplete;
 }
 
 export interface TextDataInput extends GenericDataInput {
   type: Extract<InputType, "text">;
+  autocomplete?: Autocomplete;
 }
 
 export interface Option {

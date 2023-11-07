@@ -1,14 +1,17 @@
 import { JSX } from "preact";
 import InputType from "../types/InputType.tsx";
 import { Option } from "../types/DataInput.tsx";
-import GetDateInput from "../islands/GetDateInput.tsx";
+import { SignalLike } from "$fresh/src/types.ts";
+import Autocomplete from "../types/Autocomplete.tsx";
+import GetDateInput, { DateElements, isAutocompleteRecord } from "../islands/GetDateInput.tsx";
 
-interface GetInputProps extends JSX.HTMLAttributes<HTMLInputElement> {
+interface GetInputProps extends Omit<JSX.HTMLAttributes<HTMLInputElement>, "autocomplete"> {
   id: string;
   placeholder?: string;
   type: InputType;
   onlyDate?: boolean;
   options?: Option[];
+  autocomplete?: Partial<Record<DateElements, Autocomplete>> | Autocomplete | SignalLike<Autocomplete>;
 }
 
 export default function GetInput({
@@ -18,6 +21,7 @@ export default function GetInput({
   options,
   onlyDate,
   placeholder,
+  autocomplete,
   class: className,
   ...props
 }: GetInputProps): JSX.Element {
@@ -51,7 +55,12 @@ export default function GetInput({
       );
 
     case "date":
-      return <GetDateInput defaultValue={props.defaultValue} onlyDate={onlyDate} id={id} />;
+      if ((typeof autocomplete === "string" || !isAutocompleteRecord(autocomplete)) && autocomplete)
+        throw new Error("Autocomplete must be an object: " + autocomplete);
+
+      return (
+        <GetDateInput autocomplete={autocomplete} defaultValue={props.defaultValue} onlyDate={onlyDate} id={id} />
+      );
 
     case "checkbox":
       return <p>To do</p>;
