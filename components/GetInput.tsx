@@ -73,9 +73,9 @@ export default function GetInput({
 
     case "radio":
       return (
-        <div class="flex flex-wrap gap-2">
+        <div class="flex flex-wrap">
           {options?.map((option) => (
-            <div class="flex items-center gap-2">
+            <div class="flex items-center">
               <input
                 name={id}
                 type="radio"
@@ -85,7 +85,8 @@ export default function GetInput({
                 checked={props.defaultValue === option.id}
                 {...props}
               />
-              <label class="flex items-center gap-2" for={`${id}_${option.id}`}>
+
+              <label class="flex items-center pl-1 pr-4 select-none" for={`${id}_${option.id}`}>
                 {option.name}
               </label>
             </div>

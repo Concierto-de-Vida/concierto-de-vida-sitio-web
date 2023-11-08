@@ -40,7 +40,7 @@ export default function Input({ data, class: className = "", patient }: InputPro
   return (
     <label class={`flex gap-2 flex-wrap md:flex-nowrap ${className} ${marginTop}`} title={name}>
       <div class={`${styles.label} ${type !== "date" ? "md:mb-[-3px]" : ""}`}>
-        <p class="truncate text-ellipsis font-semibold">{name}:</p>
+        <p class="truncate text-ellipsis font-semibold select-none">{name}:</p>
       </div>
 
       <GetInput
