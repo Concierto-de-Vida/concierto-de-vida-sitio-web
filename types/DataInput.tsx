@@ -25,6 +25,7 @@ export interface NumberDataInput extends GenericDataInput {
 export interface TextDataInput extends GenericDataInput {
   type: Extract<InputType, "text">;
   autocomplete?: Autocomplete;
+  pattern?: string;
 }
 
 export interface Option {

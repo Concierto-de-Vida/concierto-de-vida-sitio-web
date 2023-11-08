@@ -40,6 +40,7 @@ const DATA: (DataInput | DataInput[])[] = [
     name: "Correo electrónico",
     required: true,
     autocomplete: Autocomplete.EMAIL,
+    pattern: "[^@]+@[^\\.]+\\..+",
   },
   {
     id: "birthdate",
