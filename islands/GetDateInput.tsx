@@ -5,7 +5,7 @@ import { Signal, useSignal } from "@preact/signals";
 import DateSelect from "../components/DateSelect.tsx";
 import MonthSelect from "../components/MonthSelect.tsx";
 import { getButtonClasses } from "../components/Button.tsx";
-import Autocomplete from "../types/Autocomplete.tsx";
+import Autocomplete from "../types/Autocomplete.ts";
 
 export type DateElements = "date" | "month" | "year" | "hours" | "minutes" | "seconds";
 

@@ -3,9 +3,9 @@ import { JSX } from "preact";
 import db from "../../data/database.ts";
 import redirect from "../../utils/redirect.ts";
 import Button from "../../components/Button.tsx";
-import DataInput from "../../types/DataInput.tsx";
+import DataInput from "../../types/DataInput.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import Autocomplete from "../../types/Autocomplete.tsx";
+import Autocomplete from "../../types/Autocomplete.ts";
 import Typography from "../../components/Typography.tsx";
 import Input from "../../components/pacientes/Input.tsx";
 import { Patient, castPatientValue } from "../../data/models/Patient.ts";
@@ -78,6 +78,23 @@ const DATA: (DataInput | DataInput[])[] = [
       { id: "separated", name: "Separado(a)" },
       { id: "widowed", name: "Viudo(a)" },
       { id: "other", name: "Otro" },
+    ],
+  },
+  {
+    id: "educationLevel",
+    type: "dropdown",
+    name: "Nivel de escolaridad",
+    required: true,
+    options: [
+      { id: "preschool", name: "Preescolar" },
+      { id: "primary", name: "Primaria" },
+      { id: "secondary", name: "Secundaria" },
+      { id: "highSchool", name: "Preparatoria o Bachillerato" },
+      { id: "technical", name: "Técnico o Comercial" },
+      { id: "bachelor", name: "Licenciatura" },
+      { id: "master", name: "Maestría" },
+      { id: "doctorate", name: "Doctorado" },
+      { id: "none", name: "Sin escolaridad" },
     ],
   },
 ];

@@ -1,8 +1,8 @@
 import { JSX } from "preact";
-import InputType from "../types/InputType.tsx";
-import { Option } from "../types/DataInput.tsx";
+import InputType from "../types/InputType.ts";
+import { Option } from "../types/DataInput.ts";
 import { SignalLike } from "$fresh/src/types.ts";
-import Autocomplete from "../types/Autocomplete.tsx";
+import Autocomplete from "../types/Autocomplete.ts";
 import GetDateInput, { DateElements, isAutocompleteRecord } from "../islands/GetDateInput.tsx";
 
 interface GetInputProps extends Omit<JSX.HTMLAttributes<HTMLInputElement>, "autocomplete"> {

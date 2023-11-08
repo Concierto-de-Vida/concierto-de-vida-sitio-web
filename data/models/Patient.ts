@@ -1,6 +1,7 @@
 import { z } from "zod";
-import { GENDERS, isGender } from "../../types/Genders.tsx";
-import { CIVIL_STATUSES, isCivilStatus } from "../../types/CivilStatus.tsx";
+import { GENDERS, isGender } from "../../types/Genders.ts";
+import { CIVIL_STATUSES, isCivilStatus } from "../../types/CivilStatus.ts";
+import { EDUCATION_LEVELS, isEducationLevel } from "../../types/EducationLevel.ts";
 
 export type Patient = z.infer<typeof PatientModel>;
 
@@ -12,6 +13,7 @@ const PatientModel = z.object({
   email: z.string().email(),
   gender: z.enum(GENDERS),
   civilStatus: z.enum(CIVIL_STATUSES),
+  educationLevel: z.enum(EDUCATION_LEVELS),
 });
 
 export default PatientModel;
@@ -36,6 +38,10 @@ export function castPatientValue(
 
     case "civilStatus":
       if (!isCivilStatus(value)) throw new Error("value is not a valid civil status: " + value);
+      return (patient[key] = value);
+
+    case "educationLevel":
+      if (!isEducationLevel(value)) throw new Error("value is not a valid education level: " + value);
       return (patient[key] = value);
 
     case "firstName":

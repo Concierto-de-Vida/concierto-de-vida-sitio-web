@@ -1,5 +1,5 @@
-import InputType from "./InputType.tsx";
-import Autocomplete from "./Autocomplete.tsx";
+import InputType from "./InputType.ts";
+import Autocomplete from "./Autocomplete.ts";
 import { Patient } from "../data/models/Patient.ts";
 import { DateElements } from "../islands/GetDateInput.tsx";
 

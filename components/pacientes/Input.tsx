@@ -1,5 +1,5 @@
 import GetInput from "../GetInput.tsx";
-import DataInput from "../../types/DataInput.tsx";
+import DataInput from "../../types/DataInput.ts";
 import { getTypographyClass } from "../Typography.tsx";
 import { Patient } from "../../data/models/Patient.ts";
 
