@@ -3,7 +3,12 @@ import InputType from "../types/InputType.ts";
 import { Option } from "../types/DataInput.ts";
 import { SignalLike } from "$fresh/src/types.ts";
 import Autocomplete from "../types/Autocomplete.ts";
-import GetDateInput, { DateElements, isAutocompleteRecord } from "../islands/GetDateInput.tsx";
+import GetDateInput, { DateElements } from "../islands/GetDateInput.tsx";
+
+type AutocompleteRecord = Partial<Record<DateElements, Autocomplete>>;
+function isAutocompleteRecord(autocomplete: unknown): autocomplete is AutocompleteRecord {
+  return typeof autocomplete === "object";
+}
 
 interface GetInputProps extends Omit<JSX.HTMLAttributes<HTMLInputElement>, "autocomplete"> {
   id: string;

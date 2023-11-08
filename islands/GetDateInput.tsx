@@ -9,11 +9,6 @@ import Autocomplete from "../types/Autocomplete.ts";
 
 export type DateElements = "date" | "month" | "year" | "hours" | "minutes" | "seconds";
 
-export type AutocompleteRecord = Partial<Record<DateElements, Autocomplete>>;
-export function isAutocompleteRecord(autocomplete: unknown): autocomplete is AutocompleteRecord {
-  return typeof autocomplete === "object";
-}
-
 interface EditableObjectDateInputProps {
   id: string;
   onlyDate?: boolean;
