@@ -105,6 +105,7 @@ const DATA: (DataInput | DataInput[])[] = [
     name: "Teléfono",
     required: true,
     autocomplete: Autocomplete.TEL,
+    array: true,
   },
 ];
 
@@ -128,7 +129,11 @@ export const handler: Handlers<NuevoPacienteProps | { message: string }> = {
 
     for (const data of DATA.flat()) {
       const value = formEntries[data.id];
-      if (value === undefined && data.type !== "date") {
+
+      const isValueAnArray = "array" in data && data.array;
+      const isValueNotDirectlyInForm = data.type === "date" || isValueAnArray;
+
+      if (value === undefined && !isValueNotDirectlyInForm) {
         if (data.required) return ctx.renderNotFound({ message: `Missing required field: ${data.id}` });
         else continue;
       }
@@ -150,10 +155,18 @@ export const handler: Handlers<NuevoPacienteProps | { message: string }> = {
         }
 
         castPatientValue(data.id, date.valueOf(), newPatient);
-      } else {
-        castPatientValue(data.id, value, newPatient);
       }
+      //
+      else if (isValueAnArray) {
+        const values: string[] = [];
+        for (const key in formEntries) if (key.startsWith(`${data.id}&`)) values.push(formEntries[key].toString());
+        castPatientValue(data.id, values, newPatient);
+      }
+      //
+      else castPatientValue(data.id, value, newPatient);
     }
+
+    console.log("newPation", newPatient);
 
     if (ctx.params.id === "nuevo") {
       await db.patients.add(newPatient);

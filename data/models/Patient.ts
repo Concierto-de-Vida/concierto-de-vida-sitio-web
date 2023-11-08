@@ -14,7 +14,7 @@ const PatientModel = z.object({
   gender: z.enum(GENDERS),
   civilStatus: z.enum(CIVIL_STATUSES),
   educationLevel: z.enum(EDUCATION_LEVELS),
-  phone: z.string(),
+  phone: z.array(z.string()),
 });
 
 export default PatientModel;
@@ -45,10 +45,12 @@ export function castPatientValue(
       if (!isEducationLevel(value)) throw new Error("value is not a valid education level: " + value);
       return (patient[key] = value);
 
+    case "phone":
+      return (patient[key] = value as string[]);
+
     case "firstName":
     case "lastName":
     case "email":
-    case "phone":
       return (patient[key] = value as string);
   }
 }

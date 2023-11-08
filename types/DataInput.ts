@@ -26,6 +26,7 @@ export interface TextDataInput extends GenericDataInput {
   type: Extract<InputType, "text">;
   autocomplete?: Autocomplete;
   pattern?: string;
+  array?: boolean;
 }
 
 export interface Option {

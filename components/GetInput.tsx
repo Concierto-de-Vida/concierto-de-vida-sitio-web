@@ -2,6 +2,7 @@ import { JSX } from "preact";
 import InputType from "../types/InputType.ts";
 import { Option } from "../types/DataInput.ts";
 import { SignalLike } from "$fresh/src/types.ts";
+import ArrayInput from "../islands/ArrayInput.tsx";
 import Autocomplete from "../types/Autocomplete.ts";
 import GetDateInput, { DateElements } from "../islands/GetDateInput.tsx";
 
@@ -10,28 +11,40 @@ function isAutocompleteRecord(autocomplete: unknown): autocomplete is Autocomple
   return typeof autocomplete === "object";
 }
 
-interface GetInputProps extends Omit<JSX.HTMLAttributes<HTMLInputElement>, "autocomplete"> {
+export interface GetInputProps
+  extends Omit<JSX.HTMLAttributes<HTMLInputElement>, "autocomplete" | "defaultValue"> {
   id: string;
   placeholder?: string;
   type: InputType;
   onlyDate?: boolean;
   options?: Option[];
   autocomplete?: Partial<Record<DateElements, Autocomplete>> | Autocomplete | SignalLike<Autocomplete>;
+  /** Buttons to add more or remove */
+  array?: boolean;
+  defaultValue?: string | number | boolean | string[] | number[] | boolean[];
 }
 
-export default function GetInput({
-  id,
-  type,
-  step,
-  options,
-  onlyDate,
-  placeholder,
-  autocomplete,
-  defaultValue,
-  class: className,
-  ...props
-}: GetInputProps): JSX.Element {
+export default function GetInput(allProps: GetInputProps): JSX.Element {
+  const {
+    id,
+    type,
+    step,
+    array,
+    options,
+    onlyDate,
+    placeholder,
+    autocomplete,
+    defaultValue,
+    class: className,
+    ...props
+  } = allProps;
+
   const classes = `px-1 md:px-2 w-full ${className ?? ""}`;
+
+  if (array) {
+    const { array: _, ...propsWithoutArray } = allProps;
+    return <ArrayInput {...propsWithoutArray} />;
+  }
 
   switch (type) {
     case "number":
@@ -46,7 +59,7 @@ export default function GetInput({
           class={classes}
           placeholder={placeholder}
           autoComplete={autocomplete}
-          defaultValue={defaultValue}
+          defaultValue={defaultValue?.toString()}
           step={step ?? "0.000000001"}
         />
       );
@@ -63,7 +76,7 @@ export default function GetInput({
           class={classes}
           step={step ?? undefined}
           placeholder={placeholder}
-          defaultValue={defaultValue}
+          defaultValue={defaultValue?.toString()}
           autoComplete={autocomplete}
         />
       );
@@ -71,7 +84,14 @@ export default function GetInput({
     case "date":
       if ((typeof autocomplete === "string" || !isAutocompleteRecord(autocomplete)) && autocomplete)
         throw new Error("Autocomplete must be an object: " + autocomplete);
-      return <GetDateInput autocomplete={autocomplete} defaultValue={defaultValue} onlyDate={onlyDate} id={id} />;
+      return (
+        <GetDateInput
+          id={id}
+          onlyDate={onlyDate}
+          autocomplete={autocomplete}
+          defaultValue={defaultValue?.toString()}
+        />
+      );
 
     case "checkbox":
       return <p>To do</p>;

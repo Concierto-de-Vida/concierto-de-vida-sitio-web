@@ -9,7 +9,8 @@ import * as $3 from "./routes/index.tsx";
 import * as $4 from "./routes/pacientes/[id].tsx";
 import * as $5 from "./routes/pacientes/index.tsx";
 import * as $6 from "./routes/pacientes/removeall.tsx";
-import * as $$0 from "./islands/GetDateInput.tsx";
+import * as $$0 from "./islands/ArrayInput.tsx";
+import * as $$1 from "./islands/GetDateInput.tsx";
 import { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -23,7 +24,8 @@ const manifest = {
     "./routes/pacientes/removeall.tsx": $6,
   },
   islands: {
-    "./islands/GetDateInput.tsx": $$0,
+    "./islands/ArrayInput.tsx": $$0,
+    "./islands/GetDateInput.tsx": $$1,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;
