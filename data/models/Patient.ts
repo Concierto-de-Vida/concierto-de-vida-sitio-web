@@ -14,6 +14,7 @@ const PatientModel = z.object({
   gender: z.enum(GENDERS),
   civilStatus: z.enum(CIVIL_STATUSES),
   educationLevel: z.enum(EDUCATION_LEVELS),
+  phone: z.string(),
 });
 
 export default PatientModel;
@@ -47,6 +48,7 @@ export function castPatientValue(
     case "firstName":
     case "lastName":
     case "email":
+    case "phone":
       return (patient[key] = value as string);
   }
 }
