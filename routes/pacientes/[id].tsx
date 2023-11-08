@@ -60,18 +60,24 @@ const DATA: (DataInput | DataInput[])[] = [
     name: "Género",
     required: true,
     options: [
-      {
-        id: "male",
-        name: "Masculino",
-      },
-      {
-        id: "female",
-        name: "Femenino",
-      },
-      {
-        id: "other",
-        name: "Otro",
-      },
+      { id: "male", name: "Masculino" },
+      { id: "female", name: "Femenino" },
+      { id: "other", name: "Otro" },
+    ],
+  },
+  {
+    id: "civilStatus",
+    type: "dropdown",
+    name: "Estado civil",
+    required: true,
+    options: [
+      { id: "single", name: "Soltero(a)" },
+      { id: "married", name: "Casado(a)" },
+      { id: "union", name: "Unión de hecho" },
+      { id: "divorced", name: "Divorciado(a)" },
+      { id: "separated", name: "Separado(a)" },
+      { id: "widowed", name: "Viudo(a)" },
+      { id: "other", name: "Otro" },
     ],
   },
 ];

@@ -43,6 +43,17 @@ export interface RadioDataInput extends GenericDataInput {
   options: Option[];
 }
 
-type DataInput = DateDataInput | NumberDataInput | TextDataInput | CheckboxDataInput | RadioDataInput;
+export interface DropdownDataInput extends GenericDataInput {
+  type: Extract<InputType, "dropdown">;
+  options: Option[];
+}
+
+type DataInput =
+  | DateDataInput
+  | NumberDataInput
+  | TextDataInput
+  | CheckboxDataInput
+  | RadioDataInput
+  | DropdownDataInput;
 
 export default DataInput;

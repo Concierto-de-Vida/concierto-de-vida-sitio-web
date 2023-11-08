@@ -22,6 +22,7 @@ export default function GetInput({
   onlyDate,
   placeholder,
   autocomplete,
+  defaultValue,
   class: className,
   ...props
 }: GetInputProps): JSX.Element {
@@ -36,10 +37,11 @@ export default function GetInput({
           {...props}
           id={id}
           name={id}
+          type="number"
           class={classes}
-          type={"number"}
           placeholder={placeholder}
           autoComplete={autocomplete}
+          defaultValue={defaultValue}
           step={step ?? "0.000000001"}
         />
       );
@@ -52,10 +54,11 @@ export default function GetInput({
           {...props}
           id={id}
           name={id}
-          type={"text"}
+          type="text"
           class={classes}
           step={step ?? undefined}
           placeholder={placeholder}
+          defaultValue={defaultValue}
           autoComplete={autocomplete}
         />
       );
@@ -63,10 +66,7 @@ export default function GetInput({
     case "date":
       if ((typeof autocomplete === "string" || !isAutocompleteRecord(autocomplete)) && autocomplete)
         throw new Error("Autocomplete must be an object: " + autocomplete);
-
-      return (
-        <GetDateInput autocomplete={autocomplete} defaultValue={props.defaultValue} onlyDate={onlyDate} id={id} />
-      );
+      return <GetDateInput autocomplete={autocomplete} defaultValue={defaultValue} onlyDate={onlyDate} id={id} />;
 
     case "checkbox":
       return <p>To do</p>;
@@ -77,13 +77,13 @@ export default function GetInput({
           {options?.map((option) => (
             <div class="flex items-center">
               <input
+                {...props}
                 name={id}
                 type="radio"
                 class={classes}
                 value={option.id}
                 id={`${id}_${option.id}`}
-                checked={props.defaultValue === option.id}
-                {...props}
+                defaultChecked={defaultValue === option.id}
               />
 
               <label class="flex items-center pl-1 pr-4 select-none" for={`${id}_${option.id}`}>
@@ -92,6 +92,17 @@ export default function GetInput({
             </div>
           ))}
         </div>
+      );
+
+    case "dropdown":
+      return (
+        <select id={id} name={id} class={`${classes} px-2 w-full bg-gray-200 rounded`}>
+          {options?.map((option) => (
+            <option value={option.id} selected={defaultValue === option.id}>
+              {option.name}
+            </option>
+          ))}
+        </select>
       );
   }
 }

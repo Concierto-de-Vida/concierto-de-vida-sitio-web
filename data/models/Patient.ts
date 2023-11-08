@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { GENDERS, isGender } from "../../types/Genders.tsx";
+import { CIVIL_STATUSES, isCivilStatus } from "../../types/CivilStatus.tsx";
 
 export type Patient = z.infer<typeof PatientModel>;
 
@@ -10,6 +11,7 @@ const PatientModel = z.object({
   createdAt: z.number(),
   email: z.string().email(),
   gender: z.enum(GENDERS),
+  civilStatus: z.enum(CIVIL_STATUSES),
 });
 
 export default PatientModel;
@@ -30,6 +32,10 @@ export function castPatientValue(
 
     case "gender":
       if (!isGender(value)) throw new Error("value is not a valid gender: " + value);
+      return (patient[key] = value);
+
+    case "civilStatus":
+      if (!isCivilStatus(value)) throw new Error("value is not a valid civil status: " + value);
       return (patient[key] = value);
 
     case "firstName":

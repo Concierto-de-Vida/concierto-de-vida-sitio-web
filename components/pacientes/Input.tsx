@@ -43,7 +43,7 @@ export default function Input({ data, class: className = "", patient }: InputPro
 
       <GetInput
         {...data}
-        class="border-b-2 border-b-black"
+        class={type === "dropdown" ? "" : "border-b-2 border-b-black"}
         defaultValue={(patient?.[id] ?? "").toString() || undefined}
       />
     </label>
