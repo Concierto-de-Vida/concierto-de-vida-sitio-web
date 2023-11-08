@@ -5,7 +5,7 @@ import { Patient } from "../../data/models/Patient.ts";
 
 const styles = {
   label:
-    `whitespace-nowrap flex items-center gap-2 max-w-full md:max-w-[40%] font-semibold ` +
+    `whitespace-nowrap flex items-top gap-2 max-w-full md:max-w-[40%] font-semibold ` +
     `${getTypographyClass("p")}`,
 };
 
@@ -44,7 +44,7 @@ export default function Input({ data, class: className = "", patient }: InputPro
       <GetInput
         {...data}
         defaultValue={patient?.[id] || undefined}
-        class={type === "dropdown" ? "" : "border-b-2 border-b-black"}
+        class={type === "dropdown" ? "" : "border-b-2 border-b-black h-[fit-content]"}
       />
     </label>
   );

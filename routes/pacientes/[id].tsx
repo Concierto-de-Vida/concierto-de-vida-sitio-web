@@ -34,14 +34,24 @@ const DATA: (DataInput | DataInput[])[] = [
       autocomplete: Autocomplete.FAMILY_NAME,
     },
   ],
-  {
-    id: "email",
-    type: "text",
-    name: "Correo electrónico",
-    required: true,
-    autocomplete: Autocomplete.EMAIL,
-    pattern: "[^@]+@[^\\.]+\\..+",
-  },
+  [
+    {
+      id: "email",
+      type: "text",
+      name: "Correo electrónico",
+      required: true,
+      autocomplete: Autocomplete.EMAIL,
+      pattern: "[^@]+@[^\\.]+\\..+",
+    },
+    {
+      id: "phone",
+      type: "text",
+      name: "Teléfono",
+      required: true,
+      autocomplete: Autocomplete.TEL,
+      array: true,
+    },
+  ],
   {
     id: "birthdate",
     type: "date",
@@ -99,14 +109,6 @@ const DATA: (DataInput | DataInput[])[] = [
       ],
     },
   ],
-  {
-    id: "phone",
-    type: "text",
-    name: "Teléfono",
-    required: true,
-    autocomplete: Autocomplete.TEL,
-    array: true,
-  },
 ];
 
 export const handler: Handlers<NuevoPacienteProps | { message: string }> = {
