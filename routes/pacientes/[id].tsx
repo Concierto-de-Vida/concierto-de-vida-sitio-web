@@ -1,6 +1,7 @@
 import moment from "moment";
 import { JSX } from "preact";
 import db from "../../data/database.ts";
+import { CITIES } from "../../types/City.ts";
 import redirect from "../../utils/redirect.ts";
 import Button from "../../components/Button.tsx";
 import DataInput from "../../types/DataInput.ts";
@@ -107,6 +108,44 @@ const DATA: (DataInput | DataInput[])[] = [
         { id: "doctorate", name: "Doctorado" },
         { id: "none", name: "Sin escolaridad" },
       ],
+    },
+  ],
+  [
+    {
+      id: "streetAddress",
+      type: "text",
+      name: "Dirección calle",
+      required: true,
+      colSpan: 4,
+    },
+    {
+      id: "neighborhood",
+      type: "text",
+      name: "Colonia",
+      required: true,
+      colSpan: 3,
+    },
+    {
+      id: "streetAddressNumber",
+      type: "text",
+      name: "Número",
+      required: true,
+      colSpan: 2,
+    },
+  ],
+  [
+    {
+      id: "city",
+      type: "dropdown",
+      name: "Ciudad",
+      required: true,
+      options: CITIES.map((city) => ({ id: city, name: city })),
+    },
+    {
+      id: "municipality",
+      type: "text",
+      name: "Municipio",
+      required: true,
     },
   ],
 ];

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CITIES, isCity } from "../../types/City.ts";
 import { GENDERS, isGender } from "../../types/Genders.ts";
 import { CIVIL_STATUSES, isCivilStatus } from "../../types/CivilStatus.ts";
 import { EDUCATION_LEVELS, isEducationLevel } from "../../types/EducationLevel.ts";
@@ -15,6 +16,11 @@ const PatientModel = z.object({
   civilStatus: z.enum(CIVIL_STATUSES),
   educationLevel: z.enum(EDUCATION_LEVELS),
   phone: z.array(z.string()),
+  streetAddress: z.string(),
+  streetAddressNumber: z.string(),
+  neighborhood: z.string(),
+  city: z.enum(CITIES),
+  municipality: z.string(),
 });
 
 export default PatientModel;
@@ -45,12 +51,20 @@ export function castPatientValue(
       if (!isEducationLevel(value)) throw new Error("value is not a valid education level: " + value);
       return (patient[key] = value);
 
+    case "city":
+      if (!isCity(value)) throw new Error("value is not a valid city: " + value);
+      return (patient[key] = value);
+
     case "phone":
       return (patient[key] = value as string[]);
 
     case "firstName":
     case "lastName":
     case "email":
+    case "streetAddress":
+    case "streetAddressNumber":
+    case "neighborhood":
+    case "municipality":
       return (patient[key] = value as string);
   }
 }
