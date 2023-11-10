@@ -33,12 +33,22 @@ export default function Input({ data, class: className = "", patient }: InputPro
     );
   }
 
-  const { id, type, name } = data;
+  const { id, type, name, required } = data;
   const marginTop = type === "date" ? "mt-2" : "";
   return (
-    <label class={`flex gap-2 flex-wrap md:flex-nowrap ${className} ${marginTop}`} title={name}>
+    <label
+      class={`flex gap-2 flex-wrap md:flex-nowrap ${className} ${marginTop}`}
+      title={name + (required ? " (requerido)" : "")}
+    >
       <div class={`${styles.label} ${type !== "date" ? "md:mb-[-3px]" : ""}`}>
-        <p class="truncate text-ellipsis font-semibold select-none">{name}:</p>
+        <p class="truncate text-ellipsis font-semibold select-none">
+          {name}
+          {required ? (
+            <span class="text-red-700 font-normal" title="Requerido">
+              *
+            </span>
+          ) : null}
+        </p>
       </div>
 
       <GetInput
