@@ -44,6 +44,9 @@ const PatientModel = z.object({
   caregivers: z.enum(BOOLEAN_ANSWERS),
   caregiverName: z.array(z.string()).optional(),
   caregiverRelationship: z.array(z.string()).optional(),
+  otherMedications: z.enum(BOOLEAN_ANSWERS),
+  otherMedicationName: z.array(z.string()).optional(),
+  otherMedicationFor: z.array(z.string()).optional(),
 });
 
 export default PatientModel;
@@ -72,6 +75,8 @@ export function castPatientValue(
     case "caregiverName":
     case "helpActivities":
     case "currentMedication":
+    case "otherMedicationFor":
+    case "otherMedicationName":
     case "caregiverRelationship":
     case "familyWithEMRelationship":
       return (patient[key] = value as string[]);
@@ -86,6 +91,7 @@ export function castPatientValue(
     case "caregivers":
     case "familyWithEM":
     case "bladderControl":
+    case "otherMedications":
       if (!isBooleanAnswer(value)) throw new Error("value is not a valid boolean answer: " + value);
       return (patient[key] = value);
     case "gender":

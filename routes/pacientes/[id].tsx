@@ -23,7 +23,7 @@ const DATA: (DataInput | DataInput[])[] = [
     {
       id: "firstName",
       type: "text",
-      name: "Nombre(s)",
+      name: "Nombre",
       required: true,
       autocomplete: Autocomplete.GIVEN_NAME,
     },
@@ -302,6 +302,30 @@ const DATA: (DataInput | DataInput[])[] = [
       id: "caregiverRelationship",
       type: "text",
       name: "Parentezco",
+      array: true,
+    },
+  ],
+  {
+    id: "otherMedications",
+    name: "Otros medicamentos",
+    type: "radio",
+    required: true,
+    options: [
+      { id: "yes", name: "Sí" },
+      { id: "no", name: "No" },
+    ],
+  },
+  [
+    {
+      id: "otherMedicationName",
+      type: "text",
+      name: "Nombre",
+      array: true,
+    },
+    {
+      id: "otherMedicationFor",
+      type: "text",
+      name: "Para padecimiento",
       array: true,
     },
   ],
