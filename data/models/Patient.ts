@@ -55,50 +55,47 @@ export function castPatientValue(
   patient: Patient = {} as Patient
 ): Patient[keyof Patient] {
   switch (key) {
+    // NUMBERS //
+    case "relapses":
     case "birthdate":
     case "createdAt":
-    case "diagnosisDate":
-    case "relapses":
     case "lastRelapse":
-      return (patient[key] = value as number);
+    case "diagnosisDate":
+      return (patient[key] = +(value as number));
 
-    case "familyWithEMRelationship":
-    case "currentMedication":
+    // STRING ARRAYS //
     case "aid":
+    case "phone":
     case "helpActivities":
+    case "currentMedication":
+    case "familyWithEMRelationship":
       return (patient[key] = value as string[]);
 
+    // STRINGS //
+    default:
+      return (patient[key] = `${value}`);
+
+    // ENUMS //
+    case "usesAid":
+    case "needsHelp":
+    case "familyWithEM":
+    case "bladderControl":
+      if (!isBooleanAnswer(value)) throw new Error("value is not a valid boolean answer: " + value);
+      return (patient[key] = value);
     case "gender":
       if (!isGender(value)) throw new Error("value is not a valid gender: " + value);
       return (patient[key] = value);
-
     case "civilStatus":
       if (!isCivilStatus(value)) throw new Error("value is not a valid civil status: " + value);
       return (patient[key] = value);
-
     case "educationLevel":
       if (!isEducationLevel(value)) throw new Error("value is not a valid education level: " + value);
       return (patient[key] = value);
-
     case "city":
       if (!isCity(value)) throw new Error("value is not a valid city: " + value);
       return (patient[key] = value);
-
     case "disabilityScale":
       if (!isDisabilityScale(value)) throw new Error("value is not a valid disability scale: " + value);
       return (patient[key] = value);
-
-    case "familyWithEM":
-    case "usesAid":
-    case "bladderControl":
-    case "needsHelp":
-      if (!isBooleanAnswer(value)) throw new Error("value is not a valid boolean answer: " + value);
-      return (patient[key] = value);
-
-    case "phone":
-      return (patient[key] = value as string[]);
-
-    default:
-      return (patient[key] = value as string);
   }
 }
