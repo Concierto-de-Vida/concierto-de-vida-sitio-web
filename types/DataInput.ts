@@ -15,11 +15,13 @@ export interface DateDataInput extends GenericDataInput {
   /** If true, hours and below are not going to be required */
   onlyDate?: boolean;
   autocomplete?: Partial<Record<DateElements, Autocomplete>>;
+  defaultValue?: Date | number;
 }
 
 export interface NumberDataInput extends GenericDataInput {
   type: Extract<InputType, "number">;
   autocomplete?: Autocomplete;
+  defaultValue?: number;
 }
 
 export interface TextDataInput extends GenericDataInput {
@@ -27,11 +29,13 @@ export interface TextDataInput extends GenericDataInput {
   autocomplete?: Autocomplete;
   pattern?: string;
   array?: boolean;
+  defaultValue?: string;
 }
 
 export interface Option {
   id: string;
   name: string;
+  defaultSelected?: true;
 }
 
 export interface CheckboxDataInput extends GenericDataInput {

@@ -74,10 +74,9 @@ export default function GetInput(allProps: GetInputProps): JSX.Element {
           name={id}
           type="text"
           class={classes}
-          step={step ?? undefined}
           placeholder={placeholder}
-          defaultValue={defaultValue?.toString()}
           autoComplete={autocomplete}
+          defaultValue={defaultValue?.toString()}
         />
       );
 
@@ -94,7 +93,29 @@ export default function GetInput(allProps: GetInputProps): JSX.Element {
       );
 
     case "checkbox":
-      return <p>To do</p>;
+      return (
+        <div class="flex">
+          {options?.map((option) => (
+            <div class="flex items-center">
+              <input
+                {...props}
+                name={id}
+                type="checkbox"
+                class={classes}
+                value={option.id}
+                id={`${id}_${option.id}`}
+                defaultChecked={
+                  defaultValue === option.id || (defaultValue === undefined && option.defaultSelected)
+                }
+              />
+
+              <label class="flex items-center pl-1 pr-4 select-none" for={`${id}_${option.id}`}>
+                {option.name}
+              </label>
+            </div>
+          ))}
+        </div>
+      );
 
     case "radio":
       return (
@@ -108,7 +129,9 @@ export default function GetInput(allProps: GetInputProps): JSX.Element {
                 class={classes}
                 value={option.id}
                 id={`${id}_${option.id}`}
-                defaultChecked={defaultValue === option.id}
+                defaultChecked={
+                  defaultValue === option.id || (defaultValue === undefined && option.defaultSelected)
+                }
               />
 
               <label class="flex items-center pl-1 pr-4 select-none" for={`${id}_${option.id}`}>
@@ -123,7 +146,12 @@ export default function GetInput(allProps: GetInputProps): JSX.Element {
       return (
         <select id={id} name={id} class={`${classes} px-2 w-full bg-gray-200 rounded`}>
           {options?.map((option) => (
-            <option value={option.id} selected={defaultValue === option.id}>
+            <option
+              value={option.id}
+              selected={
+                defaultValue === option.id || (defaultValue === undefined && option.defaultSelected) || undefined
+              }
+            >
               {option.name}
             </option>
           ))}

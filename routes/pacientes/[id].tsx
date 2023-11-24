@@ -148,6 +148,135 @@ const DATA: (DataInput | DataInput[])[] = [
       required: true,
     },
   ],
+  [
+    {
+      id: "medicalService",
+      type: "text",
+      name: "Servicio médico",
+    },
+    {
+      id: "doctorTreating",
+      type: "text",
+      name: "Médico tratante",
+    },
+  ],
+  {
+    id: "diagnosisDate",
+    type: "date",
+    name: "Fecha de diagnóstico",
+  },
+  {
+    id: "treatment",
+    type: "text",
+    name: "Tratamiento utilizado",
+  },
+  {
+    id: "treatmentFrequency",
+    type: "text",
+    name: "Cada cuánto tiempo es indicado el tratamiento",
+  },
+  {
+    id: "currentMedication",
+    type: "text",
+    name: "Medicamento actual",
+  },
+  {
+    id: "hospitalization",
+    type: "text",
+    name: "Internamiento con",
+  },
+  [
+    {
+      id: "familyWithEM",
+      type: "radio",
+      name: "Familiar con E.M.",
+      options: [
+        { id: "yes", name: "Sí" },
+        { id: "no", name: "No", defaultSelected: true },
+      ],
+      colSpan: 6,
+    },
+    {
+      id: "familyWithEMRelationship",
+      type: "text",
+      name: "Parentezco",
+      array: true,
+      colSpan: 9,
+    },
+  ],
+  {
+    id: "relapses",
+    type: "number",
+    name: "Número de recaidas",
+  },
+  {
+    id: "lastRelapse",
+    type: "date",
+    name: "Última recaida",
+  },
+  {
+    id: "disabilityScale",
+    type: "dropdown",
+    name: "Grado de escala de discapacidad",
+    options: [
+      { id: "0", name: "0" },
+      { id: "1", name: "1" },
+      { id: "2", name: "2" },
+      { id: "3", name: "3" },
+      { id: "4", name: "4" },
+      { id: "5", name: "5" },
+      { id: "6", name: "6" },
+      { id: "7", name: "7" },
+      { id: "8", name: "8" },
+      { id: "9", name: "9" },
+      { id: "10", name: "10" },
+    ],
+  },
+  {
+    id: "usesAid",
+    type: "radio",
+    name: "¿Usa aparato de ayuda?",
+    required: true,
+    options: [
+      { id: "yes", name: "Sí" },
+      { id: "no", name: "No" },
+    ],
+  },
+  {
+    id: "aid",
+    type: "text",
+    name: "¿Cuál?",
+  },
+  {
+    id: "bladderControl",
+    type: "radio",
+    name: "¿Control de esfínteres?",
+    options: [
+      { id: "yes", name: "Sí" },
+      { id: "no", name: "No" },
+    ],
+    required: true,
+  },
+  {
+    id: "needsHelp",
+    type: "radio",
+    name: "¿Necesita ayuda para actividades diarias?",
+    required: true,
+    options: [
+      { id: "yes", name: "Sí" },
+      { id: "no", name: "No" },
+    ],
+  },
+  {
+    id: "helpActivities",
+    type: "text",
+    name: "¿Cuáles?",
+  },
+  {
+    id: "helpActivitiesTime",
+    type: "text",
+    name: "¿Cuánto tiempo le dedica?",
+  },
 ];
 
 export const handler: Handlers<NuevoPacienteProps | { message: string }> = {
