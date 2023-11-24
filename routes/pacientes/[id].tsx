@@ -329,6 +329,18 @@ const DATA: (DataInput | DataInput[])[] = [
       array: true,
     },
   ],
+  {
+    id: "allergies",
+    name: "Reacciones alérgicas",
+    type: "text",
+    array: true,
+  },
+  {
+    id: "additionalComments",
+    name: "Comentarios adicionales",
+    type: "text",
+    array: true,
+  },
 ];
 
 export const handler: Handlers<NuevoPacienteProps | { message: string }> = {

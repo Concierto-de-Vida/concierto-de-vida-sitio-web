@@ -47,6 +47,8 @@ const PatientModel = z.object({
   otherMedications: z.enum(BOOLEAN_ANSWERS),
   otherMedicationName: z.array(z.string()).optional(),
   otherMedicationFor: z.array(z.string()).optional(),
+  allergies: z.array(z.string()).optional(),
+  additionalComments: z.array(z.string()).optional(),
 });
 
 export default PatientModel;
@@ -72,10 +74,12 @@ export function castPatientValue(
     // STRING ARRAYS //
     case "aid":
     case "phone":
+    case "allergies":
     case "caregiverName":
     case "helpActivities":
     case "currentMedication":
     case "otherMedicationFor":
+    case "additionalComments":
     case "otherMedicationName":
     case "caregiverRelationship":
     case "familyWithEMRelationship":
