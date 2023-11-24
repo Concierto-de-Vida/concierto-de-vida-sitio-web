@@ -164,6 +164,7 @@ const DATA: (DataInput | DataInput[])[] = [
     id: "diagnosisDate",
     type: "date",
     name: "Fecha de diagnóstico",
+    onlyDate: true,
   },
   {
     id: "treatment",
@@ -214,6 +215,7 @@ const DATA: (DataInput | DataInput[])[] = [
     id: "lastRelapse",
     type: "date",
     name: "Última recaida",
+    onlyDate: true,
   },
   {
     id: "disabilityScale",
@@ -280,7 +282,6 @@ const DATA: (DataInput | DataInput[])[] = [
     type: "text",
     name: "¿Cuánto tiempo le dedica?",
   },
-  // Cuidadores
   {
     id: "caregivers",
     name: "Cuidadores",
@@ -359,8 +360,6 @@ export const handler: Handlers<NuevoPacienteProps | { message: string }> = {
 
     const formEntries = Object.fromEntries(form.entries());
 
-    console.log(formEntries);
-
     for (const data of DATA.flat()) {
       const value = formEntries[data.id];
 
@@ -400,8 +399,6 @@ export const handler: Handlers<NuevoPacienteProps | { message: string }> = {
       else castPatientValue(data.id, value, newPatient);
     }
 
-    console.log("newPation", newPatient);
-
     if (ctx.params.id === "nuevo") {
       await db.patients.add(newPatient);
     } else {
@@ -426,7 +423,7 @@ export default function NuevoPaciente({ data }: PageProps<NuevoPacienteProps>) {
   }
 
   return (
-    <form method="POST" class="flex flex-col items-center mt-4">
+    <form method="POST" class="flex flex-col items-center mt-4 mb-16">
       <div class="w-full flex flex-col gap-6">{inputs}</div>
 
       <div>
