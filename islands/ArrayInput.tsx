@@ -73,8 +73,10 @@ function InputWithButton({
 }
 
 export default function ArrayInput({ defaultValue, ...props }: ArrayInputProps) {
+  const defaultValueToUse = Array.isArray(defaultValue) ? defaultValue : [defaultValue];
+  if (defaultValueToUse.length === 0) defaultValueToUse.push("");
   const inputs = useSignal(
-    (Array.isArray(defaultValue) ? defaultValue : [defaultValue]).map((defaultValue) => {
+    defaultValueToUse.map((defaultValue) => {
       const nano = nanoid(NANO_SIZE);
       return (
         <InputWithButton
@@ -87,7 +89,7 @@ export default function ArrayInput({ defaultValue, ...props }: ArrayInputProps) 
       );
     })
   );
-  const last = useSignal(inputs.value[inputs.value.length - 1].props.nano);
+  const last = useSignal(inputs.value[inputs.value.length - 1]?.props.nano || "");
   const initialized = useSignal(false);
 
   useSignalEffect(() => {

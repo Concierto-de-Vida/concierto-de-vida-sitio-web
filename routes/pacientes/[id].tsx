@@ -392,12 +392,16 @@ export const handler: Handlers<NuevoPacienteProps | { message: string }> = {
       //
       else if (isValueAnArray) {
         const values: string[] = [];
-        for (const key in formEntries) if (key.startsWith(`${data.id}&`)) values.push(formEntries[key].toString());
+        for (const key in formEntries)
+          if (key.startsWith(`${data.id}&`) && formEntries[key].toString() !== "")
+            values.push(formEntries[key].toString());
         castPatientValue(data.id, values, newPatient);
       }
       //
       else castPatientValue(data.id, value, newPatient);
     }
+
+    console.log(newPatient);
 
     if (ctx.params.id === "nuevo") {
       await db.patients.add(newPatient);
