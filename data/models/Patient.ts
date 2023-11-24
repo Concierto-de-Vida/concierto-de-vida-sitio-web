@@ -27,7 +27,7 @@ const PatientModel = z.object({
   doctorTreating: z.string().optional(),
   diagnosisDate: z.number().optional(),
   treatment: z.string().optional(),
-  currentMedication: z.string().optional(),
+  currentMedication: z.array(z.string()).optional(),
   treatmentFrequency: z.string().optional(),
   hospitalization: z.string().optional(),
   familyWithEM: z.enum(BOOLEAN_ANSWERS),
@@ -36,10 +36,10 @@ const PatientModel = z.object({
   lastRelapse: z.number().optional(),
   disabilityScale: z.enum(DISABILITY_SCALES),
   usesAid: z.enum(BOOLEAN_ANSWERS),
-  aid: z.string().optional(),
+  aid: z.array(z.string()).optional(),
   bladderControl: z.enum(BOOLEAN_ANSWERS),
   needsHelp: z.enum(BOOLEAN_ANSWERS),
-  helpActivities: z.string().optional(),
+  helpActivities: z.array(z.string()).optional(),
   helpActivitiesTime: z.string().optional(),
 });
 
@@ -63,6 +63,9 @@ export function castPatientValue(
       return (patient[key] = value as number);
 
     case "familyWithEMRelationship":
+    case "currentMedication":
+    case "aid":
+    case "helpActivities":
       return (patient[key] = value as string[]);
 
     case "gender":

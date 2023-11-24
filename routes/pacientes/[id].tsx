@@ -179,6 +179,7 @@ const DATA: (DataInput | DataInput[])[] = [
     id: "currentMedication",
     type: "text",
     name: "Medicamento actual",
+    array: true,
   },
   {
     id: "hospitalization",
@@ -235,7 +236,7 @@ const DATA: (DataInput | DataInput[])[] = [
   {
     id: "usesAid",
     type: "radio",
-    name: "¿Usa aparato de ayuda?",
+    name: "¿Usa aparato/s de ayuda?",
     required: true,
     options: [
       { id: "yes", name: "Sí" },
@@ -245,7 +246,8 @@ const DATA: (DataInput | DataInput[])[] = [
   {
     id: "aid",
     type: "text",
-    name: "¿Cuál?",
+    name: "¿Cuál/es?",
+    array: true,
   },
   {
     id: "bladderControl",
@@ -271,6 +273,7 @@ const DATA: (DataInput | DataInput[])[] = [
     id: "helpActivities",
     type: "text",
     name: "¿Cuáles?",
+    array: true,
   },
   {
     id: "helpActivitiesTime",
