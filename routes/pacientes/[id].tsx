@@ -280,6 +280,31 @@ const DATA: (DataInput | DataInput[])[] = [
     type: "text",
     name: "¿Cuánto tiempo le dedica?",
   },
+  // Cuidadores
+  {
+    id: "caregivers",
+    name: "Cuidadores",
+    type: "radio",
+    required: true,
+    options: [
+      { id: "yes", name: "Sí" },
+      { id: "no", name: "No" },
+    ],
+  },
+  [
+    {
+      id: "caregiverName",
+      type: "text",
+      name: "Nombre",
+      array: true,
+    },
+    {
+      id: "caregiverRelationship",
+      type: "text",
+      name: "Parentezco",
+      array: true,
+    },
+  ],
 ];
 
 export const handler: Handlers<NuevoPacienteProps | { message: string }> = {
