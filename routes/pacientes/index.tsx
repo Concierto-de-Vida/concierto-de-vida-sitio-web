@@ -19,7 +19,7 @@ export default async function Pacientes() {
         </Button>
       </a>
 
-      <div class="flex flex-col gap-2">
+      <div f-client-nav={false} class="flex flex-col gap-2">
         {patients.map((paciente) => (
           <a
             href={`/pacientes/${paciente.id}`}
