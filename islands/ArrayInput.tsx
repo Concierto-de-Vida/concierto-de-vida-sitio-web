@@ -29,7 +29,7 @@ function InputWithButton({
     last.value = newNano;
     inputs.value = [
       ...inputs.value,
-      <InputWithButton {...propsToUse} last={last} inputs={inputs} id={id} nano={newNano} />,
+      <InputWithButton {...propsToUse} id={id} last={last} key={newNano} nano={newNano} inputs={inputs} />,
     ];
   }
 
@@ -74,14 +74,18 @@ function InputWithButton({
 
 export default function ArrayInput({ defaultValue, ...props }: ArrayInputProps) {
   const inputs = useSignal(
-    (Array.isArray(defaultValue) ? defaultValue : [defaultValue]).map((defaultValue) => (
-      <InputWithButton
-        nano={nanoid(8)}
-        value={IS_BROWSER ? undefined : defaultValue?.toString()}
-        defaultValue={IS_BROWSER ? defaultValue : undefined}
-        {...props}
-      />
-    ))
+    (Array.isArray(defaultValue) ? defaultValue : [defaultValue]).map((defaultValue) => {
+      const nano = nanoid(NANO_SIZE);
+      return (
+        <InputWithButton
+          {...props}
+          key={nano}
+          nano={nano}
+          value={IS_BROWSER ? undefined : defaultValue?.toString()}
+          defaultValue={IS_BROWSER ? defaultValue : undefined}
+        />
+      );
+    })
   );
   const last = useSignal(inputs.value[inputs.value.length - 1].props.nano);
   const initialized = useSignal(false);
@@ -92,12 +96,13 @@ export default function ArrayInput({ defaultValue, ...props }: ArrayInputProps) 
         const thisDefaultValue = (Array.isArray(defaultValue) ? defaultValue : [defaultValue])[i]?.toString();
         return (
           <InputWithButton
+            {...props}
             last={last}
             inputs={inputs}
+            key={input.props.nano}
             nano={input.props.nano}
             value={IS_BROWSER ? undefined : thisDefaultValue}
             defaultValue={IS_BROWSER ? thisDefaultValue : undefined}
-            {...props}
           />
         );
       });
