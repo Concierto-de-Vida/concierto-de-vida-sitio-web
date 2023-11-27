@@ -1,4 +1,3 @@
-import { hash } from "bcrypt";
 import State from "../types/state.type.ts";
 import { Handlers } from "$fresh/server.ts";
 import redirect from "../utils/redirect.ts";
