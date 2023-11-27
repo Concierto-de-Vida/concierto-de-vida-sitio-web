@@ -1,7 +1,7 @@
 import Button from "../components/Button.tsx";
 import Typography from "../components/Typography.tsx";
-import IoIosAddCircle from "react-icons/io/IoIosAddCircle.ts";
 import BsPeopleFill from "react-icons/bs/BsPeopleFill.ts";
+import IoIosAddCircle from "react-icons/io/IoIosAddCircle.ts";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       </Typography>
 
       <div class="flex flex-col gap-4 mt-8">
-        <a href="/pacientes/nuevo">
+        <a f-client-nav={false} href="/pacientes/nuevo">
           <Button class="flex items-center gap-2" color="green">
             <IoIosAddCircle size={32} />
             <Typography variant="h4">Nuevo paciente</Typography>
