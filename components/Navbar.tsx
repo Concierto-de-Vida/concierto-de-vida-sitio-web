@@ -10,7 +10,7 @@ const pages: Page[] = [];
 
 export default function Navbar({ loggedIn = false }) {
   const signInOrOut = loggedIn && (
-    <a href="/signout">
+    <a f-client-nav={false} href="/signout">
       <Button color="red">
         <span>Sign out</span>
       </Button>
