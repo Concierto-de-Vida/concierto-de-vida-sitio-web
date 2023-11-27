@@ -1,6 +1,7 @@
 import { hash } from "bcrypt";
 import State from "../types/state.type.ts";
 import { Handlers } from "$fresh/server.ts";
+import redirect from "../utils/redirect.ts";
 import Button from "../components/Button.tsx";
 import Typography from "../components/Typography.tsx";
 import { isTokenValid } from "../data/controllers/tokensController.ts";
@@ -13,9 +14,9 @@ export const handler: Handlers<null, State> = {
     if (!authToken) return new Response("Missing auth token", { status: 401 });
     if (!(await isTokenValid(authToken))) return new Response("Unauthorized", { status: 401 });
 
-    ctx.state.session.set("token", await hash(authToken));
+    ctx.state.session.set("token", authToken);
 
-    return ctx.render();
+    return redirect("/");
   },
 };
 

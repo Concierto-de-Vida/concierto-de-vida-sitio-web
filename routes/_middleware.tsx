@@ -1,27 +1,31 @@
 import State from "../types/state.type.ts";
 import redirect from "../utils/redirect.ts";
+import { kvSession } from "fresh-session/mod.ts";
 import isAdminPage from "../utils/isAdminPage.ts";
-import { cookieSession } from "fresh-session/mod.ts";
 import { Middleware } from "$fresh/src/server/types.ts";
 import { MiddlewareHandlerContext } from "$fresh/server.ts";
 import isFreshOrStaticPage from "../utils/isFreshOrStatic.ts";
 import { getToken } from "../data/controllers/tokensController.ts";
 
-const session = cookieSession({
-  secure: true,
-  httpOnly: true,
-  sameSite: "Strict",
-  maxAge: Number.MAX_SAFE_INTEGER,
-});
-
 export const { handler }: Middleware<State> = {
   handler: [
     // implement fresh-session
-    (req, ctx) => session(req, ctx as unknown as MiddlewareHandlerContext),
+    (req, ctx) =>
+      kvSession(null, {
+        secure: true,
+        httpOnly: true,
+        sameSite: "Strict",
+        maxAge: Number.MAX_SAFE_INTEGER,
+      })(req, ctx as unknown as MiddlewareHandlerContext<Record<string, unknown>>),
+
+    // load state from session
+    (_, ctx) => {
+      ctx.state.token = ctx.state.session.get("token");
+      return ctx.next();
+    },
 
     // default state
     (_, ctx) => {
-      if (!ctx.state.token) ctx.state.token = undefined;
       ctx.state.label = null;
       ctx.state.isAdmin = false;
       return ctx.next();
