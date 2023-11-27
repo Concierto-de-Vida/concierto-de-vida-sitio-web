@@ -1,10 +1,14 @@
+import State from "../types/state.type.ts";
 import { Partial } from "$fresh/runtime.ts";
 import { AppProps } from "$fresh/server.ts";
+import Navbar from "../components/Navbar.tsx";
 import { Links } from "../components/Links.tsx";
 
 const MAX_WIDTH = "max-w-screen-lg";
 
-export default function App({ Component }: AppProps) {
+export default function App({ Component, data, state }: AppProps<undefined, State>) {
+  const isLoggedIn = Boolean(state.token);
+
   return (
     <html>
       <head>
@@ -14,20 +18,9 @@ export default function App({ Component }: AppProps) {
         <Links />
       </head>
       <body f-client-nav class="min-h-screen flex flex-col">
-        <Partial name="body">
-          <header class="flex justify-center sticky top-0 left-0 right-0 z-50 p-3 bg-gray-400">
-            <div class={`flex justify-between items-center w-full ${MAX_WIDTH}`}>
-              <a href="/">
-                <h1 class="font-bold text-xl">Concierto de Vida</h1>
-              </a>
-              <div class="flex gap-5">
-                <a class="hover:underline hidden" href="/programs">
-                  Programas
-                </a>
-              </div>
-            </div>
-          </header>
+        <Navbar loggedIn={isLoggedIn} />
 
+        <Partial name="body">
           <div class={`px-4 pt-3 mx-auto w-full ${MAX_WIDTH} flex-1 h-full`}>
             <Component />
           </div>
