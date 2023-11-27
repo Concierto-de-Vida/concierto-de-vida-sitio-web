@@ -13,7 +13,7 @@ export async function createToken(label: string | null) {
 }
 
 /** @param token Unhashed token */
-export async function isTokenValid(token: string) {
+export async function isTokenValid(token: string, isAdminToo = false) {
   const { result: tokens } = await db.tokens.getMany();
 
   let isValid = false;
@@ -22,7 +22,8 @@ export async function isTokenValid(token: string) {
   // timing attacks
   await Promise.all(
     tokens.map(async (t) => {
-      if (await compare(token, await hash(t.value.token))) isValid = true;
+      if ((await compare(token, await hash(t.value.token))) && (isAdminToo ? t.value.isAdmin : true))
+        isValid = true;
     })
   );
 
