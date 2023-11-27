@@ -1,5 +1,6 @@
 import db from "../database.ts";
 import { compare, hash } from "bcrypt";
+import generatePassword from "../../utils/generatePassword.ts";
 
 /** @param token Unhashed token */
 export async function getToken(token: string) {
@@ -7,8 +8,8 @@ export async function getToken(token: string) {
   return a ? a.flat() : null;
 }
 
-export async function createToken(token: string, label: string | null) {
-  await db.tokens.add({ token, isAdmin: false, createdAt: new Date(), label });
+export async function createToken(label: string | null) {
+  return db.tokens.add({ token: await generatePassword(), isAdmin: false, createdAt: new Date(), label });
 }
 
 /** @param token Unhashed token */

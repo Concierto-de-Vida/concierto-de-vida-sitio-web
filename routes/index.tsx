@@ -1,9 +1,12 @@
+import State from "../types/state.type.ts";
+import FaKey from "react-icons/fa/FaKey.ts";
+import { AppProps } from "$fresh/server.ts";
 import Button from "../components/Button.tsx";
 import Typography from "../components/Typography.tsx";
 import BsPeopleFill from "react-icons/bs/BsPeopleFill.ts";
 import IoIosAddCircle from "react-icons/io/IoIosAddCircle.ts";
 
-export default function Home() {
+export default function Home({ state }: AppProps<undefined, State>) {
   return (
     <>
       <Typography variant="h1" class="text-center">
@@ -24,6 +27,15 @@ export default function Home() {
             <Typography variant="h4">Pacientes</Typography>
           </Button>
         </a>
+
+        {state.isAdmin && (
+          <a f-client-nav={false} href="/credentials">
+            <Button class="flex items-center gap-2" color="red">
+              <FaKey size={28} />
+              <Typography variant="h4">Credenciales</Typography>
+            </Button>
+          </a>
+        )}
       </div>
     </>
   );

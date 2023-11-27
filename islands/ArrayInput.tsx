@@ -1,5 +1,5 @@
 import { JSX } from "preact";
-import { nanoid } from "nanoid";
+import { nanoid } from "nanoid/mod.ts";
 import { FiTrash2 } from "react-icons/fi";
 import Button from "../components/Button.tsx";
 import { IS_BROWSER } from "$fresh/runtime.ts";
