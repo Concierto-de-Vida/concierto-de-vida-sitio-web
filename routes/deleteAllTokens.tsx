@@ -8,6 +8,6 @@ export const handler: Handlers<undefined, State> = {
   async GET(_, ctx) {
     await db.tokens.deleteMany();
     await checkMasterPassword();
-    return redirect("/");
+    return redirect("/credentials");
   },
 };
