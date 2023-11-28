@@ -9,7 +9,11 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import Autocomplete from "../../types/Autocomplete.ts";
 import Typography from "../../components/Typography.tsx";
 import Input from "../../components/pacientes/Input.tsx";
+import { GENDERS, translateGender } from "../../types/Genders.ts";
 import { Patient, castPatientValue } from "../../data/models/Patient.ts";
+import { CIVIL_STATUSES, translateCivilStatus } from "../../types/CivilStatus.ts";
+import { BOOLEAN_ANSWERS, translateBooleanAnswer } from "../../types/BooleanAnswer.ts";
+import { EDUCATION_LEVELS, translateEducationLevel } from "../../types/EducationLevel.ts";
 
 const DATA: (DataInput | DataInput[])[] = [
   {
@@ -70,11 +74,7 @@ const DATA: (DataInput | DataInput[])[] = [
     type: "radio",
     name: "Género",
     required: true,
-    options: [
-      { id: "male", name: "Masculino" },
-      { id: "female", name: "Femenino" },
-      { id: "other", name: "Otro" },
-    ],
+    options: GENDERS.map((g) => ({ id: g, name: translateGender(g) })),
   },
   [
     {
@@ -82,32 +82,14 @@ const DATA: (DataInput | DataInput[])[] = [
       type: "dropdown",
       name: "Estado civil",
       required: true,
-      options: [
-        { id: "single", name: "Soltero(a)" },
-        { id: "married", name: "Casado(a)" },
-        { id: "union", name: "Unión de hecho" },
-        { id: "divorced", name: "Divorciado(a)" },
-        { id: "separated", name: "Separado(a)" },
-        { id: "widowed", name: "Viudo(a)" },
-        { id: "other", name: "Otro" },
-      ],
+      options: CIVIL_STATUSES.map((cs) => ({ id: cs, name: translateCivilStatus(cs) })),
     },
     {
       id: "educationLevel",
       type: "dropdown",
       name: "Nivel de escolaridad",
       required: true,
-      options: [
-        { id: "preschool", name: "Preescolar" },
-        { id: "primary", name: "Primaria" },
-        { id: "secondary", name: "Secundaria" },
-        { id: "highSchool", name: "Preparatoria o Bachillerato" },
-        { id: "technical", name: "Técnico o Comercial" },
-        { id: "bachelor", name: "Licenciatura" },
-        { id: "master", name: "Maestría" },
-        { id: "doctorate", name: "Doctorado" },
-        { id: "none", name: "Sin escolaridad" },
-      ],
+      options: EDUCATION_LEVELS.map((el) => ({ id: el, name: translateEducationLevel(el) })),
     },
   ],
   [
@@ -240,10 +222,7 @@ const DATA: (DataInput | DataInput[])[] = [
     type: "radio",
     name: "¿Usa aparato/s de ayuda?",
     required: true,
-    options: [
-      { id: "yes", name: "Sí" },
-      { id: "no", name: "No" },
-    ],
+    options: BOOLEAN_ANSWERS.map((a) => ({ id: a, name: translateBooleanAnswer(a) })),
   },
   {
     id: "aid",
@@ -255,10 +234,7 @@ const DATA: (DataInput | DataInput[])[] = [
     id: "bladderControl",
     type: "radio",
     name: "¿Control de esfínteres?",
-    options: [
-      { id: "yes", name: "Sí" },
-      { id: "no", name: "No" },
-    ],
+    options: BOOLEAN_ANSWERS.map((a) => ({ id: a, name: translateBooleanAnswer(a) })),
     required: true,
   },
   {
@@ -266,10 +242,7 @@ const DATA: (DataInput | DataInput[])[] = [
     type: "radio",
     name: "¿Necesita ayuda para actividades diarias?",
     required: true,
-    options: [
-      { id: "yes", name: "Sí" },
-      { id: "no", name: "No" },
-    ],
+    options: BOOLEAN_ANSWERS.map((a) => ({ id: a, name: translateBooleanAnswer(a) })),
   },
   {
     id: "helpActivities",
@@ -287,10 +260,7 @@ const DATA: (DataInput | DataInput[])[] = [
     name: "Cuidadores",
     type: "radio",
     required: true,
-    options: [
-      { id: "yes", name: "Sí" },
-      { id: "no", name: "No" },
-    ],
+    options: BOOLEAN_ANSWERS.map((a) => ({ id: a, name: translateBooleanAnswer(a) })),
   },
   [
     {
@@ -311,10 +281,7 @@ const DATA: (DataInput | DataInput[])[] = [
     name: "Otros medicamentos",
     type: "radio",
     required: true,
-    options: [
-      { id: "yes", name: "Sí" },
-      { id: "no", name: "No" },
-    ],
+    options: BOOLEAN_ANSWERS.map((a) => ({ id: a, name: translateBooleanAnswer(a) })),
   },
   [
     {
