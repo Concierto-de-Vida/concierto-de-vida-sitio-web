@@ -6,6 +6,8 @@ const env = loadSync({ examplePath: "./.example.env" });
 export const MASTER_TOKEN = Deno.env.get("MASTER_TOKEN") || env.MASTER_TOKEN;
 if (!MASTER_TOKEN) throw new Error("MASTER_TOKEN is not defined");
 
+export const TIMEZONE = Deno.env.get("TIMEZONE") || env.TIMEZONE || "America/Monterrey";
+
 // Set the APP_KEY environment variable to the master token
 Deno.env.set("APP_KEY", MASTER_TOKEN);
 

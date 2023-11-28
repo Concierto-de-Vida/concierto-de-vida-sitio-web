@@ -11,9 +11,10 @@ import * as $5 from "./routes/deleteAllTokens.tsx";
 import * as $6 from "./routes/index.tsx";
 import * as $7 from "./routes/login.tsx";
 import * as $8 from "./routes/pacientes/[id].tsx";
-import * as $9 from "./routes/pacientes/index.tsx";
-import * as $10 from "./routes/pacientes/removeall.tsx";
-import * as $11 from "./routes/signout.tsx";
+import * as $9 from "./routes/pacientes/descargar.tsx";
+import * as $10 from "./routes/pacientes/index.tsx";
+import * as $11 from "./routes/pacientes/removeall.tsx";
+import * as $12 from "./routes/signout.tsx";
 import * as $$0 from "./islands/ArrayInput.tsx";
 import * as $$1 from "./islands/GetDateInput.tsx";
 
@@ -28,9 +29,10 @@ const manifest = {
     "./routes/index.tsx": $6,
     "./routes/login.tsx": $7,
     "./routes/pacientes/[id].tsx": $8,
-    "./routes/pacientes/index.tsx": $9,
-    "./routes/pacientes/removeall.tsx": $10,
-    "./routes/signout.tsx": $11,
+    "./routes/pacientes/descargar.tsx": $9,
+    "./routes/pacientes/index.tsx": $10,
+    "./routes/pacientes/removeall.tsx": $11,
+    "./routes/signout.tsx": $12,
   },
   islands: {
     "./islands/ArrayInput.tsx": $$0,
