@@ -5,6 +5,8 @@
 /// <reference no-default-lib="true" />
 /// <reference lib="dom.asynciterable" />
 
+import "./env.ts";
+import "./crons/crons.ts";
 import manifest from "./fresh.gen.ts";
 import config from "./fresh.config.ts";
 import { start } from "$fresh/server.ts";
