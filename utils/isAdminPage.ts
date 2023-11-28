@@ -1,6 +1,7 @@
 export const adminURLs = [
   //
   "/credentials",
+  "/deleteAllTokens",
 ].map((pathname) => new URLPattern({ pathname }));
 
 /**
