@@ -1,6 +1,6 @@
-import { isTokenValid } from "../data/controllers/tokensController.ts";
 import db from "../data/database.ts";
 import { MASTER_TOKEN } from "../env.ts";
+import { isTokenValid } from "../data/controllers/tokensController.ts";
 
 export default async function checkMasterPassword() {
   // Add the token to the database if it doesn't exist
