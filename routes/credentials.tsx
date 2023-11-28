@@ -36,7 +36,7 @@ export default async function Credentials() {
 
   return (
     <div class="flex flex-col gap-10">
-      <Typography variant="h1">Credenciales</Typography>
+      <Typography variant="h2">Credenciales</Typography>
 
       <form method="post" class="flex gap-2 flex-col md:flex-row">
         <label class="flex gap-0 md:gap-2 flex-wrap md:flex-nowrap w-full" title="Nombre (requerido)">

@@ -8,9 +8,7 @@ export default async function Pacientes() {
 
   return (
     <div class="flex flex-col gap-5">
-      <Typography variant="h2" class="text-2xl font-bold">
-        Pacientes
-      </Typography>
+      <Typography variant="h2">Pacientes</Typography>
 
       <a href="/pacientes/nuevo">
         <Button class="flex items-center gap-2" color="green">
