@@ -1,9 +1,12 @@
+import { Document } from "kvdex";
 import db from "../data/database.ts";
+import { FiTrash2 } from "react-icons/fi";
 import State from "../types/state.type.ts";
-import { Handlers } from "$fresh/server.ts";
 import redirect from "../utils/redirect.ts";
 import Button from "../components/Button.tsx";
+import { Token } from "../data/models/Token.ts";
 import GetInput from "../components/GetInput.tsx";
+import { AppProps, Handlers } from "$fresh/server.ts";
 import { createToken } from "../data/controllers/tokensController.ts";
 import Typography, { getTypographyClass } from "../components/Typography.tsx";
 
@@ -15,27 +18,37 @@ const styles = {
     `${getTypographyClass("p")}`,
 };
 
-export const handler: Handlers<null, State> = {
+interface CredentialsProps {
+  tokens: Document<Token>[];
+}
+
+export const handler: Handlers<CredentialsProps, State> = {
   async POST(req) {
     const form = await req.formData();
 
+    const deleteId = form.get("delete")?.toString();
     const label = form.get("label")?.toString();
-    if (!label) return new Response("Missing label", { status: 401 });
+    if (!label && !deleteId) return new Response("Falta información", { status: 401 });
 
-    await createToken(label);
+    if (label) await createToken(label);
+    if (deleteId) {
+      const token = await db.tokens.find(deleteId);
+      if (token && !token?.value.isAdmin) await db.tokens.delete(deleteId);
+    }
 
     return redirect("/credentials");
   },
+  GET: async (_, ctx) => ctx.render({ tokens: (await db.tokens.getMany()).result }),
 };
 
-export default async function Credentials() {
-  const { result: tokens } = await db.tokens.getMany();
+export default function Credentials({ data, state }: AppProps<CredentialsProps, State>) {
+  const { tokens } = data;
 
   tokens.sort((a, b) => b.value.createdAt.valueOf() - a.value.createdAt.valueOf());
   if (tokens.length >= 2) tokens.unshift(tokens.pop()!);
 
   return (
-    <div class="flex flex-col gap-10">
+    <div class="flex flex-col gap-10 mb-7">
       <Typography variant="h2">Credenciales</Typography>
 
       <form method="post" class="flex gap-2 flex-col md:flex-row">
@@ -58,12 +71,13 @@ export default async function Credentials() {
         </div>
       </form>
 
-      <div class="overflow-x-auto">
+      <form method="post" class="overflow-x-auto">
         <table class="table-auto w-full border-collapse border">
           <thead>
             <tr>
               <th class={styles.th}>Nombre</th>
               <th class={styles.th}>Token</th>
+              <th class={styles.th}></th>
             </tr>
           </thead>
           <tbody>
@@ -73,11 +87,18 @@ export default async function Credentials() {
                 <td class={styles.td}>
                   <code>{token.value.token}</code>
                 </td>
+                <td class={styles.td}>
+                  {state.token !== token.value.token && (
+                    <Button type="submit" color="red" name="delete" value={token.id.toString()}>
+                      <FiTrash2 />
+                    </Button>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      </form>
     </div>
   );
 }
