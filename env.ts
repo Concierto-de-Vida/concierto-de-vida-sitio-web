@@ -10,4 +10,4 @@ export const MASTER_TOKEN = env.MASTER_TOKEN;
 
 export const IS_PRODUCTION = Boolean(Deno.env.get("DENO_DEPLOYMENT_ID"));
 
-await checkMasterPassword();
+setTimeout(checkMasterPassword, 100);
