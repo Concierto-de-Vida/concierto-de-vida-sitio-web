@@ -1,6 +1,9 @@
+import { loadSync } from "$std/dotenv/mod.ts";
 import checkMasterPassword from "./utils/checkMasterPassword.ts";
 
-export const MASTER_TOKEN = Deno.env.get("MASTER_TOKEN")!;
+const env = loadSync({ examplePath: "./.example.env" });
+
+export const MASTER_TOKEN = Deno.env.get("MASTER_TOKEN") || env.MASTER_TOKEN;
 if (!MASTER_TOKEN) throw new Error("MASTER_TOKEN is not defined");
 
 // Set the APP_KEY environment variable to the master token

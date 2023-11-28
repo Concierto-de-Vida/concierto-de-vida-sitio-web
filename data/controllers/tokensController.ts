@@ -1,5 +1,5 @@
 import db from "../database.ts";
-import { compare, hash } from "bcrypt";
+import { compare, hash } from "../../utils/bcrypt.ts";
 import generatePassword from "../../utils/generatePassword.ts";
 
 /** @param token Unhashed token */
