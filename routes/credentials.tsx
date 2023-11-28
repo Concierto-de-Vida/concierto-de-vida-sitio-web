@@ -58,24 +58,26 @@ export default async function Credentials() {
         </div>
       </form>
 
-      <table class="table-auto w-full">
-        <thead>
-          <tr>
-            <th class={styles.th}>Nombre</th>
-            <th class={styles.th}>Token</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tokens.map((token) => (
+      <div class="overflow-x-auto">
+        <table class="table-auto w-full border-collapse border">
+          <thead>
             <tr>
-              <td class={styles.td}>{token.value.label}</td>
-              <td class={styles.td}>
-                <code>{token.value.token}</code>
-              </td>
+              <th class={styles.th}>Nombre</th>
+              <th class={styles.th}>Token</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {tokens.map((token) => (
+              <tr>
+                <td class={styles.td}>{token.value.label}</td>
+                <td class={styles.td}>
+                  <code>{token.value.token}</code>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
