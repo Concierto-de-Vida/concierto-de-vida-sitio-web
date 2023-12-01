@@ -89,7 +89,13 @@ export default function Credentials({ data, state }: PageProps<CredentialsProps,
                 </td>
                 <td class={styles.td}>
                   {state.token !== token.value.token && (
-                    <Button type="submit" color="red" name="delete" value={token.id.toString()}>
+                    <Button
+                      color="red"
+                      type="submit"
+                      name="delete"
+                      f-client-nav={false}
+                      value={token.id.toString()}
+                    >
                       <FiTrash2 />
                     </Button>
                   )}
