@@ -1,8 +1,8 @@
 import State from "../types/state.type.ts";
 import redirect from "../utils/redirect.ts";
 import Button from "../components/Button.tsx";
-import { PageProps, Handlers } from "$fresh/server.ts";
 import Typography from "../components/Typography.tsx";
+import { PageProps, Handlers } from "$fresh/server.ts";
 import { isTokenValid } from "../data/controllers/tokensController.ts";
 
 interface LoginProps {
@@ -35,7 +35,7 @@ export default function Login({ data }: PageProps<LoginProps, State>) {
         Iniciar sesión
       </Typography>
 
-      <form method="post">
+      <form method="post" f-client-nav={false}>
         <div class="flex flex-col">
           <input
             required

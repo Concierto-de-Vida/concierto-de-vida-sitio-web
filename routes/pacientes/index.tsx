@@ -26,14 +26,14 @@ export default async function Pacientes() {
           </Button>
         </a>
 
-        <a href="/pacientes/descargar?preview" f-client-nav={false} title="Ver todos los datos">
+        <a href="/pacientes/descargar?preview" title="Ver todos los datos">
           <Button class="flex items-center gap-2" color="blue">
             <FaEye size={20} />
           </Button>
         </a>
       </div>
 
-      <div f-client-nav={false} class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2">
         {patients.map((paciente) => (
           <a
             href={`/pacientes/${paciente.id}`}

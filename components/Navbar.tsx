@@ -33,7 +33,7 @@ export default function Navbar({ loggedIn = false }) {
     <nav class="bg-gray-300">
       <div class="mx-auto block w-full max-w-screen-lg py-2 px-4 lg:py-3">
         <div class="container mx-auto flex items-center justify-between text-gray-900">
-          <a href="/">
+          <a f-client-nav={loggedIn} href="/">
             <Typography variant="h5" class="mr-4 cursor-pointer">
               Concierto de Vida
             </Typography>

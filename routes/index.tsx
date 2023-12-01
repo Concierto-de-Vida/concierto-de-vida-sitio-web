@@ -14,7 +14,7 @@ export default function Home({ state }: PageProps<undefined, State>) {
       </Typography>
 
       <div class="flex flex-col gap-4 mt-8">
-        <a f-client-nav={false} href="/pacientes/nuevo">
+        <a href="/pacientes/nuevo">
           <Button class="flex items-center gap-2" color="green">
             <IoIosAddCircle size={32} />
             <Typography variant="h4">Nuevo paciente</Typography>
@@ -29,7 +29,7 @@ export default function Home({ state }: PageProps<undefined, State>) {
         </a>
 
         {state.isAdmin && (
-          <a f-client-nav={false} href="/credentials">
+          <a href="/credentials">
             <Button class="flex items-center gap-2" color="red">
               <FaKey size={28} />
               <Typography variant="h4">Credenciales</Typography>

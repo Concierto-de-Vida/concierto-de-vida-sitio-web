@@ -311,6 +311,17 @@ const DATA: (DataInput | DataInput[])[] = [
   },
 ];
 
+const _ = [
+  "col-span-2",
+  "col-span-3",
+  "col-span-4",
+  "col-span-6",
+  "col-span-9",
+  "md:grid-cols-2",
+  "md:grid-cols-9",
+  "md:grid-cols-15",
+];
+
 export const handler: Handlers<NuevoPacienteProps | { message: string }> = {
   async GET(_, ctx) {
     if (ctx.params.id === "nuevo") return await ctx.render({});
