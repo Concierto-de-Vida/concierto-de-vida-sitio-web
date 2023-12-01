@@ -23,6 +23,7 @@ export function Links() {
       <link rel="icon" type="image/png" sizes="192x192" href={asset("/favicon/android-icon-192x192.png")} />
 
       <meta name="msapplication-TileImage" content={asset("/favicon/ms-icon-144x144.png")} />
+      <link rel="stylesheet" href="/styles.css" />
     </>
   );
 }
