@@ -1,10 +1,8 @@
 import moment from "moment";
 import db from "../../data/database.ts";
 import { TIMEZONE } from "../../env.ts";
-import { Head } from "$fresh/runtime.ts";
 import State from "../../types/state.type.ts";
 import { stringify, parse } from "$std/csv/mod.ts";
-import { Links } from "../../components/Links.tsx";
 import AsciiTable, { AsciiAlign } from "ascii_table";
 import { Patient } from "../../data/models/Patient.ts";
 import { translateGender } from "../../types/Genders.ts";
@@ -180,23 +178,15 @@ export default function Descargar({ data }: PageProps<DescargarProps, State>) {
   }
 
   return (
-    <>
-      <Head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <Links />
-        <title>Concierto de Vida - Descargar datos</title>
-      </Head>
-      <div class="p-2 whitespace-nowrap">
-        <code>
-          {table
-            .toString()
-            .split("\n")
-            .map((line) => (
-              <p>{line.split("").map((c) => (c === " " ? <>&nbsp;</> : c))}</p>
-            ))}
-        </code>
-      </div>
-    </>
+    <div class="p-2 whitespace-nowrap">
+      <code>
+        {table
+          .toString()
+          .split("\n")
+          .map((line) => (
+            <p>{line.split("").map((c) => (c === " " ? <>&nbsp;</> : c))}</p>
+          ))}
+      </code>
+    </div>
   );
 }

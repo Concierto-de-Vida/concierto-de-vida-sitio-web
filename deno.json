@@ -11,7 +11,6 @@
     "update_deps": "deno task -q run:molt check ./**/*.ts"
   },
   "lint": { "rules": { "tags": ["fresh", "recommended"] } },
-  "nodeModulesDir": true,
   "imports": {
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.0",
     "@preact/signals": "https://esm.sh/*@preact/signals@1.2.1",
@@ -85,9 +84,8 @@
     "react-icons/vsc/": "https://cdn.jsdelivr.net/gh/urielch/react-icons-vsc@1.0.9/ico/",
     "react-icons/wi": "https://cdn.jsdelivr.net/gh/urielch/react-icons-wi@1.0.9/mod.ts",
     "react-icons/wi/": "https://cdn.jsdelivr.net/gh/urielch/react-icons-wi@1.0.9/ico/",
-    "tailwindcss": "npm:tailwindcss@3.3.5",
-    "tailwindcss/": "npm:/tailwindcss@3.3.5/",
-    "tailwindcss/plugin": "npm:/tailwindcss@3.3.5/plugin.js",
+    "twind": "https://esm.sh/twind@0.16.19",
+    "twind/": "https://esm.sh/twind@0.16.19/",
     "zod": "https://deno.land/x/zod@v3.22.4/mod.ts"
   },
   "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" },
