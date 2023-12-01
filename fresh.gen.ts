@@ -2,43 +2,44 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $0 from "./routes/_404.tsx";
-import * as $1 from "./routes/_500.tsx";
-import * as $2 from "./routes/_app.tsx";
-import * as $3 from "./routes/_middleware.tsx";
-import * as $4 from "./routes/credentials.tsx";
-import * as $5 from "./routes/deleteAllTokens.tsx";
-import * as $6 from "./routes/index.tsx";
-import * as $7 from "./routes/login.tsx";
-import * as $8 from "./routes/pacientes/[id].tsx";
-import * as $9 from "./routes/pacientes/descargar.tsx";
-import * as $10 from "./routes/pacientes/index.tsx";
-import * as $11 from "./routes/pacientes/removeall.tsx";
-import * as $12 from "./routes/signout.tsx";
-import * as $$0 from "./islands/ArrayInput.tsx";
-import * as $$1 from "./islands/GetDateInput.tsx";
+import * as $_404 from "./routes/_404.tsx";
+import * as $_500 from "./routes/_500.tsx";
+import * as $_app from "./routes/_app.tsx";
+import * as $_middleware from "./routes/_middleware.tsx";
+import * as $credentials from "./routes/credentials.tsx";
+import * as $deleteAllTokens from "./routes/deleteAllTokens.tsx";
+import * as $index from "./routes/index.tsx";
+import * as $login from "./routes/login.tsx";
+import * as $pacientes_id_ from "./routes/pacientes/[id].tsx";
+import * as $pacientes_descargar from "./routes/pacientes/descargar.tsx";
+import * as $pacientes_index from "./routes/pacientes/index.tsx";
+import * as $pacientes_removeall from "./routes/pacientes/removeall.tsx";
+import * as $signout from "./routes/signout.tsx";
+import * as $ArrayInput from "./islands/ArrayInput.tsx";
+import * as $GetDateInput from "./islands/GetDateInput.tsx";
+import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
-    "./routes/_404.tsx": $0,
-    "./routes/_500.tsx": $1,
-    "./routes/_app.tsx": $2,
-    "./routes/_middleware.tsx": $3,
-    "./routes/credentials.tsx": $4,
-    "./routes/deleteAllTokens.tsx": $5,
-    "./routes/index.tsx": $6,
-    "./routes/login.tsx": $7,
-    "./routes/pacientes/[id].tsx": $8,
-    "./routes/pacientes/descargar.tsx": $9,
-    "./routes/pacientes/index.tsx": $10,
-    "./routes/pacientes/removeall.tsx": $11,
-    "./routes/signout.tsx": $12,
+    "./routes/_404.tsx": $_404,
+    "./routes/_500.tsx": $_500,
+    "./routes/_app.tsx": $_app,
+    "./routes/_middleware.tsx": $_middleware,
+    "./routes/credentials.tsx": $credentials,
+    "./routes/deleteAllTokens.tsx": $deleteAllTokens,
+    "./routes/index.tsx": $index,
+    "./routes/login.tsx": $login,
+    "./routes/pacientes/[id].tsx": $pacientes_id_,
+    "./routes/pacientes/descargar.tsx": $pacientes_descargar,
+    "./routes/pacientes/index.tsx": $pacientes_index,
+    "./routes/pacientes/removeall.tsx": $pacientes_removeall,
+    "./routes/signout.tsx": $signout,
   },
   islands: {
-    "./islands/ArrayInput.tsx": $$0,
-    "./islands/GetDateInput.tsx": $$1,
+    "./islands/ArrayInput.tsx": $ArrayInput,
+    "./islands/GetDateInput.tsx": $GetDateInput,
   },
   baseUrl: import.meta.url,
-};
+} satisfies Manifest;
 
 export default manifest;

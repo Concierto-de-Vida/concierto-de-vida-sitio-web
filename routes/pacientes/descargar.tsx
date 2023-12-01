@@ -7,7 +7,7 @@ import AsciiTable, { AsciiAlign } from "ascii_table";
 import { Patient } from "../../data/models/Patient.ts";
 import { translateGender } from "../../types/Genders.ts";
 import { translateCivilStatus } from "../../types/CivilStatus.ts";
-import { AppProps, Handlers, RouteConfig } from "$fresh/server.ts";
+import { PageProps, Handlers, RouteConfig } from "$fresh/server.ts";
 import { translateBooleanAnswer } from "../../types/BooleanAnswer.ts";
 import { translateEducationLevel } from "../../types/EducationLevel.ts";
 
@@ -161,7 +161,7 @@ export const handler: Handlers<DescargarProps, State> = {
   },
 };
 
-export default function Descargar({ data }: AppProps<DescargarProps, State>) {
+export default function Descargar({ data }: PageProps<DescargarProps, State>) {
   if (!isTouple(columnNames)) return <p>Not enough columns</p>;
 
   const csvObject = parse(data.csv, {

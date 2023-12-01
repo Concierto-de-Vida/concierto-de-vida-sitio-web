@@ -1,12 +1,12 @@
 import State from "../types/state.type.ts";
 import { Partial } from "$fresh/runtime.ts";
-import { AppProps } from "$fresh/server.ts";
+import { PageProps } from "$fresh/server.ts";
 import Navbar from "../components/Navbar.tsx";
 import { Links } from "../components/Links.tsx";
 
 const MAX_WIDTH = "max-w-screen-lg";
 
-export default function App({ Component, data, state }: AppProps<undefined, State>) {
+export default function App({ Component, data, state }: PageProps<undefined, State>) {
   const isLoggedIn = Boolean(state.token);
 
   return (

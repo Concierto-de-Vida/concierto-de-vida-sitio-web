@@ -1,12 +1,12 @@
 import State from "../types/state.type.ts";
 import FaKey from "react-icons/fa/FaKey.ts";
-import { AppProps } from "$fresh/server.ts";
+import { PageProps } from "$fresh/server.ts";
 import Button from "../components/Button.tsx";
 import Typography from "../components/Typography.tsx";
 import BsPeopleFill from "react-icons/bs/BsPeopleFill.ts";
 import IoIosAddCircle from "react-icons/io/IoIosAddCircle.ts";
 
-export default function Home({ state }: AppProps<undefined, State>) {
+export default function Home({ state }: PageProps<undefined, State>) {
   return (
     <>
       <Typography variant="h1" class="text-center">

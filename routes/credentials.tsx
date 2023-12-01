@@ -6,7 +6,7 @@ import redirect from "../utils/redirect.ts";
 import Button from "../components/Button.tsx";
 import { Token } from "../data/models/Token.ts";
 import GetInput from "../components/GetInput.tsx";
-import { AppProps, Handlers } from "$fresh/server.ts";
+import { PageProps, Handlers } from "$fresh/server.ts";
 import { createToken } from "../data/controllers/tokensController.ts";
 import Typography, { getTypographyClass } from "../components/Typography.tsx";
 
@@ -41,7 +41,7 @@ export const handler: Handlers<CredentialsProps, State> = {
   GET: async (_, ctx) => ctx.render({ tokens: (await db.tokens.getMany()).result }),
 };
 
-export default function Credentials({ data, state }: AppProps<CredentialsProps, State>) {
+export default function Credentials({ data, state }: PageProps<CredentialsProps, State>) {
   const { tokens } = data;
 
   tokens.sort((a, b) => b.value.createdAt.valueOf() - a.value.createdAt.valueOf());

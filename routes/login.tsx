@@ -1,7 +1,7 @@
 import State from "../types/state.type.ts";
 import redirect from "../utils/redirect.ts";
 import Button from "../components/Button.tsx";
-import { AppProps, Handlers } from "$fresh/server.ts";
+import { PageProps, Handlers } from "$fresh/server.ts";
 import Typography from "../components/Typography.tsx";
 import { isTokenValid } from "../data/controllers/tokensController.ts";
 
@@ -28,7 +28,7 @@ export const handler: Handlers<LoginProps, State> = {
   GET: (_, ctx) => ctx.render({ lastAttemptStatus: ctx.state.session.flash("lastAttemptStatus") }),
 };
 
-export default function Login({ data }: AppProps<LoginProps, State>) {
+export default function Login({ data }: PageProps<LoginProps, State>) {
   return (
     <>
       <Typography variant="h4" class="text-2xl mb-5">
