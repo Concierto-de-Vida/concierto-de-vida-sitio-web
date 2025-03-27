@@ -7,5 +7,6 @@ export default async function checkMasterPassword() {
   if (!(await isTokenValid(MASTER_TOKEN, true))) {
     console.log("Creating master token...");
     await db.tokens.add({ token: MASTER_TOKEN, isAdmin: true, createdAt: new Date(), label: "Administrador" });
+    console.log("Done creating master token...");
   }
 }

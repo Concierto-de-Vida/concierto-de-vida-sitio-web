@@ -1,12 +1,13 @@
 {
+  "unstable": ["kv"],
   "lock": false,
   "tasks": {
     "check": "deno check main.ts dev.ts",
-    "start": "deno run -A --unstable --watch=static/,routes/ dev.ts",
-    "dev": "deno run -A --unstable --watch=static/,routes/ dev.ts",
-    "build": "deno run -A --unstable dev.ts build",
-    "preview": "deno run -A --unstable main.ts",
-    "update": "deno run -A --unstable -r https://fresh.deno.dev/update .",
+    "start": "deno run -A --watch=static/,routes/ dev.ts",
+    "dev": "deno run -A --watch=static/,routes/ dev.ts",
+    "build": "deno run -A dev.ts build",
+    "preview": "deno run -A main.ts",
+    "update": "deno run -A -r https://fresh.deno.dev/update .",
     "run:molt": "deno run --allow-env --allow-read --allow-write=. --allow-run=git,deno --allow-net=deno.land,esm.sh,cdn.jsdelivr.net https://deno.land/x/molt/cli.ts",
     "update_deps": "deno task -q run:molt check ./**/*.ts"
   },
